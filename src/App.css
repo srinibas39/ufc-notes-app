@@ -1,0 +1,20 @@
+*{
+  box-sizing: border-box;
+  margin: 0px;
+  border: 0px;
+  font-family: var(--primary-font-family);
+}
+
+:root {
+  --primary-color: #d20a0a;
+  --primary-color2: #9e0808;
+  --secondary-color: #fff;
+  --secondary-color2: #f1f5f9;
+  --secondary-color3:#fee2e2;
+  --primary-font-family: "Klavika", Arial, sans-serif;
+  --product-like: deeppink;
+  --footer-color: #18181b;
+  --box-shadow1: 0px 0px 10px 2px #aaa;
+  --box-shadow2: 0px 0px 0 0.5px #aaa;
+  --box-shadow3: 0px 0px 0 0.5px var(--primary-color);
+}
