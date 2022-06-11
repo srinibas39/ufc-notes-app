@@ -1,0 +1,61 @@
+.label-modal {
+  padding: 1rem;
+  list-style: none;
+  box-shadow: 0px 0px 10px 4px #aaa;
+  background-color: #fff;
+}
+.label-modal li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.label-modal p {
+  font-weight: 700;
+}
+.label-modal .label-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.label-modal .label-input {
+  position: relative;
+  bottom: -14px;
+}
+
+.label-modal > * {
+  padding: 3px;
+}
+
+.label-input > * {
+  padding: 3px;
+}
+.label-input input {
+  outline: none;
+  border: 1px solid var(--primary-color);
+}
+.label-input button {
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  height: 23px;
+}
+.label-header button > span {
+  font-size: 1rem;
+}
+.label-header button {
+  background: none;
+  cursor: pointer;
+}
+
+.label-modal-container {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.5);
+}
