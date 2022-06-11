@@ -1,11 +1,13 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-
-import { Hero } from "./components/Hero/Hero";
+import { HomePage } from "./pages/HomePage";
 
 export const App = () => {
   return <>
-    <Hero />
-    
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      
+    </Routes>
   </>
 }
 
