@@ -1,0 +1,61 @@
+.signup-container {
+  height: 85.3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup {
+  height: 26rem;
+  width: 26rem;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0px 0px 10px 4px #aaa;
+}
+.signup h2 {
+  text-align: center;
+}
+
+.firstname-container {
+  display: flex;
+  flex-direction: column;
+}
+.firstname-container input {
+  height: 30px;
+  padding: 10px;
+}
+
+.lastname-container {
+  display: flex;
+  flex-direction: column;
+}
+.lastname-container input {
+  height: 30px;
+  padding: 10px;
+}
+
+.btn-register {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+.btn-register:hover {
+  background-color: var(--primary-color2);
+}
+.account-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.terms input {
+  margin-right: 5px;
+  cursor: pointer;
+}

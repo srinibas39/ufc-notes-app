@@ -1,4 +1,5 @@
 import "./App.css";
+import { AutoComplete } from "./components/AutoComplete/AutoComplete";
 
 import { Hero } from "./components/Hero/Hero";
 
@@ -6,8 +7,8 @@ import { Hero } from "./components/Hero/Hero";
 
 export const App = () => {
   return <>
-    <Hero/>
-  
+    {/* <Hero /> */}
+    <AutoComplete/>
   </>
 }
 

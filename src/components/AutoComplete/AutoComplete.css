@@ -1,0 +1,48 @@
+.auto-input li:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  cursor: pointer;
+}
+
+.search-con {
+  margin: 1rem;
+  box-shadow: var(--box-shadow2);
+  position: relative;
+}
+
+.search-con input {
+  height: 2rem;
+  outline: none;
+  border: none;
+  padding: 10px 3rem;
+  width: 100%;
+  padding-right: 10px;
+}
+
+.search-icon{
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  cursor: pointer;
+}
+
+.search-con ul {
+  list-style: none;
+  box-shadow: var(--box-shadow2);
+  margin-top: 7px;
+  max-height: 14rem;
+  overflow: auto;
+}
+.search-con ul > * {
+  padding: 5px;
+  margin: 5px 0;
+}
+
+
+.sort-conf{
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  cursor: pointer;
+  color: var(--primary-color);
+}
