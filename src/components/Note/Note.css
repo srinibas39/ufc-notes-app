@@ -1,0 +1,46 @@
+.note {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow2);
+  width: 40rem;
+}
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.note-body {
+  margin: 10px 0;
+}
+.note-tags {
+  display: flex;
+  align-items: center;
+}
+.note-tags button {
+  padding: 5px;
+  border-radius: 4px;
+  margin-right: 1rem;
+  color: var(--secondary-color);
+  background: var(--primary-color);
+}
+
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.note-options span {
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.note-footer small {
+  color: var(--primary-color);
+}
+.note-header span {
+  color: var(--primary-color);
+}
