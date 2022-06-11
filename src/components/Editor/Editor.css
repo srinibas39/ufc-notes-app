@@ -66,3 +66,7 @@
 .editor-option span{
     margin: 0px 10px;
 }
+
+.editor-option {
+    position: relative;
+}

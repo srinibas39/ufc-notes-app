@@ -2,7 +2,7 @@
 
 import "./LabelModal.css"
 
-export const LabelModal = () => {
+export const labelModal = () => {
 
 
     return <div className="label-modal-container">

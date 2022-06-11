@@ -1,4 +1,5 @@
 
+import { ColorPalette } from "../colorPalette/ColorPalette"
 import "./Editor.css"
 export const Editor = () => {
     return <div className="editor">
@@ -27,9 +28,7 @@ export const Editor = () => {
                 <span class="material-symbols-outlined">
                     check_circle
                 </span>
-                <span class="material-symbols-outlined">
-                    palette
-                </span>
+                <ColorPalette/>
                 <span class="material-symbols-outlined">
                     label
                 </span>
