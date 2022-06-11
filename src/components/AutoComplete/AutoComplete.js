@@ -56,7 +56,7 @@ export const AutoComplete = () => {
             placeholder={"Type To search"} />
         {/* onClick={() => handleSearch()} */}
         <span className="material-icons-outlined search-icon" > search </span>
-        <span class="material-symbols-outlined sort-conf">
+        <span className="material-symbols-outlined sort-conf">
             tune
         </span>
         {/* {

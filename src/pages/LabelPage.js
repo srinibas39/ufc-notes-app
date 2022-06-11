@@ -1,17 +1,16 @@
-import { AutoComplete } from "../components/AutoComplete/AutoComplete"
-import { Editor } from "../components/Editor/Editor"
+
 import { NavBar } from "../components/NavBar/NavBar"
 import { Note } from "../components/Note/Note"
 
-export const NotesPage = () => {
+export const LabelPage = () => {
     return <>
         <NavBar />
-        <AutoComplete/>
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-            <Editor />
-            <h2 className="primary-color">ALL NOTES</h2>
-            <Note/>
+            <h2 className="primary-color">LABEL 1</h2>
             <Note />
+            <h2 className="primary-color">LABEL 2</h2>
+            <Note />
+            <h2 className="primary-color">LABEL 3</h2>
             <Note />
         </div>
     </>
