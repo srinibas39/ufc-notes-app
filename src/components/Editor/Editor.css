@@ -1,0 +1,68 @@
+.editor {
+  width: 40rem;
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: var(--box-shadow2);
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.editor-header input {
+  width: 19rem;
+  height: 2rem;
+  outline: none;
+  border: 1px solid var(--primary-color);
+  padding: 10px;
+  font-weight: bold;
+}
+
+.editor-body {
+  margin-bottom: 1rem;
+}
+.editor-body textarea {
+  width: 100%;
+  height: 5rem;
+  border: 1px solid var(--primary-color);
+  padding: 10px;
+  outline: none;
+}
+
+.editor-tags {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.editor-tags button {
+  padding: 5px;
+  border-radius: 4px;
+  margin-right: 1rem;
+  color: var(--secondary-color);
+  background: var(--primary-color);
+}
+
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editor-footer small,option,select  {
+    color: var(--primary-color);
+    outline: none;
+    cursor: pointer;
+}
+
+
+.editor span{
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.editor-option span{
+    margin: 0px 10px;
+}
