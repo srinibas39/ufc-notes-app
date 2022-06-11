@@ -1,14 +1,14 @@
 import "./App.css";
-import { AutoComplete } from "./components/AutoComplete/AutoComplete";
-
 import { Hero } from "./components/Hero/Hero";
+import { NewNoteButton } from "./components/NewNoteButton/NewNoteButton";
 
 
 
 export const App = () => {
   return <>
     {/* <Hero /> */}
-    <AutoComplete/>
+    <NewNoteButton/>
+    
   </>
 }
 
