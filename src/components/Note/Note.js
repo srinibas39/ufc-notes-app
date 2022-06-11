@@ -1,3 +1,4 @@
+import { ColorPalette } from "../colorPalette/ColorPalette"
 import "./Note.css"
 export const Note = () => {
     return <div className="note">
@@ -15,14 +16,13 @@ export const Note = () => {
             <button>tag2</button>
             <button>tag2</button>
         </div>
+
         <div className="note-footer">
             <small>Created on 26/10/2021</small>
+            <small>High prority</small>
             <div className="note-options">
                 <span class="material-symbols-outlined">
                     edit
-                </span>
-                <span class="material-symbols-outlined">
-                    palette
                 </span>
                 <span class="material-symbols-outlined">
                     archive
@@ -31,7 +31,7 @@ export const Note = () => {
                     delete
                 </span>
                 <span class="material-symbols-outlined">
-                    label
+                    delete_forever
                 </span>
             </div>
         </div>

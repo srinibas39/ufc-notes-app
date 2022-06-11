@@ -36,6 +36,7 @@
 .note-options span {
   color: var(--primary-color);
   cursor: pointer;
+  margin: 0 5px;
 }
 
 .note-footer small {
@@ -43,4 +44,8 @@
 }
 .note-header span {
   color: var(--primary-color);
+}
+
+.note-options {
+  position: relative;
 }
