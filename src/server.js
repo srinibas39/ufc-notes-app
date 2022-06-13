@@ -65,7 +65,7 @@ export function makeServer({ environment = "development" } = {}) {
       this.delete("/notes/:noteId", deleteNoteHandler.bind(this));
       this.post("/notes/archives/:noteId", archiveNoteHandler.bind(this));
       this.post("/notes/trash/:noteId", trashNoteHandler.bind(this));
-
+      
       // archive routes (private)
       this.get("/archives", getAllArchivedNotesHandler.bind(this));
       this.post(
