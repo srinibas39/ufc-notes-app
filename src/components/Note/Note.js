@@ -1,25 +1,27 @@
 
 import "./Note.css"
-export const Note = () => {
+export const Note = ({note}) => {
     return <div className="note">
         <div className="note-header">
-            <h3>Title of the Note</h3>
+            <h3>{note.noteTitle}</h3>
             <span class="material-symbols-outlined">
                 push_pin
             </span>
         </div>
         <div className="note-body">
-            Body of the Note
+            {note.noteBody}
         </div>
         <div className="note-tags">
-            <button>tag1</button>
-            <button>tag2</button>
-            <button>tag2</button>
+            {
+                note.tags && note.tags.map((tag)=>{
+                    return <button key={tag}>{tag}</button>
+                })
+            }
         </div>
 
         <div className="note-footer">
-            <small>Created on 26/10/2021</small>
-            <small>High prority</small>
+            <small>Created on {note.date}</small>
+            <small>{note.priority}</small>
             <div className="note-options">
                 <span class="material-symbols-outlined">
                     edit

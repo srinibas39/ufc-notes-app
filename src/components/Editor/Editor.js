@@ -44,6 +44,7 @@ export const Editor = ({ setShow }) => {
     const handleLabel = () => {
         setShow(true)
     }
+    
     const handlePriority = (priority) => {
         setNote({ ...note, priority: priority })
 

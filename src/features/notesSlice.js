@@ -13,7 +13,7 @@ export const createNote = createAsyncThunk("notes/createNote",
     async ({ token, note }, thunkAPI) => {
         try {
             const res = await CreateNote(token, note);
-            return res.data;
+            return res.data.notes;
         }
         catch (err) {
             return thunkAPI.rejectWithValue(err.message);
@@ -43,7 +43,7 @@ export const notesSlice = createSlice({
         },
         [createNote.fulfilled]: (state, action) => {
             state.loading = false;
-            console.log(action.payload);
+            state.notes=action.payload;
         },
         [createNote.rejected]: (state, action) => {
             state.loading = false;
