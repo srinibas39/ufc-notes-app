@@ -5,6 +5,7 @@ import { HomePage } from "./pages/HomePage";
 import { LabelPage } from "./pages/LabelPage";
 import { LoginPage } from "./pages/LoginPage";
 import { NotesPage } from "./pages/NotesPage";
+import { SignupPage } from "./pages/SignupPage";
 import { TrashPage } from "./pages/TrashPage";
 
 export const App = () => {
@@ -16,6 +17,7 @@ export const App = () => {
       <Route path="/trash" element={<TrashPage />} />
       <Route path="/label" element={<LabelPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
     </Routes>
   </>
 }

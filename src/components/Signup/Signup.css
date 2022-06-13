@@ -25,6 +25,7 @@
 .firstname-container input {
   height: 30px;
   padding: 10px;
+  border: 1px solid;
 }
 
 .lastname-container {
@@ -34,6 +35,7 @@
 .lastname-container input {
   height: 30px;
   padding: 10px;
+  border: 1px solid;
 }
 
 .btn-register {
