@@ -25,9 +25,12 @@ export const Editor = ({ setShow }) => {
         setNote({ ...note, tags: labels })
     }, [labels])
 
+    useEffect(() => {
+        setNote({ ...note, color: color })
+    }, [color])
+
     const handleNote = () => {
         if (note.noteTitle) {
-            setNote({ ...note, color: color })
             dispatch(createNote({ token, note }));
             setNote({
                 ...note,
@@ -44,7 +47,7 @@ export const Editor = ({ setShow }) => {
     const handleLabel = () => {
         setShow(true)
     }
-    
+
     const handlePriority = (priority) => {
         setNote({ ...note, priority: priority })
 

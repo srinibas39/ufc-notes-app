@@ -1,7 +1,7 @@
 
 import "./Note.css"
-export const Note = ({note}) => {
-    return <div className="note">
+export const Note = ({ note }) => {
+    return <div className={`note ${note.color}`}>
         <div className="note-header">
             <h3>{note.noteTitle}</h3>
             <span class="material-symbols-outlined">
@@ -13,7 +13,7 @@ export const Note = ({note}) => {
         </div>
         <div className="note-tags">
             {
-                note.tags && note.tags.map((tag)=>{
+                note.tags && note.tags.map((tag) => {
                     return <button key={tag}>{tag}</button>
                 })
             }
