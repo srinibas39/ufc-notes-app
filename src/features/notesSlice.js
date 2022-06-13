@@ -32,6 +32,9 @@ export const notesSlice = createSlice({
         },
         setColor: (state, action) => {
             state.color = action.payload;
+        },
+        removeAllTags: (state) => {
+            state.labels = [];
         }
     },
     extraReducers: {
@@ -51,5 +54,5 @@ export const notesSlice = createSlice({
 
 })
 
-export const { loadTags, removeTags , setColor} = notesSlice.actions;
+export const { loadTags, removeTags, setColor,removeAllTags } = notesSlice.actions;
 export default notesSlice.reducer;

@@ -1,20 +1,20 @@
 
 import { useEffect, useState } from "react";
-import { createNote } from "../../features/notesSlice";
+import { createNote, removeAllTags, setColor } from "../../features/notesSlice";
 import { ColorPalette } from "../colorPalette/ColorPalette"
 import "./Editor.css";
 import { useSelector, useDispatch } from "react-redux";
 
 export const Editor = ({ setShow }) => {
-    
-    const today=new Date().toLocaleString();
+
+    const today = new Date().toLocaleString();
     const [note, setNote] = useState({
         noteTitle: "",
         noteBody: "",
         color: "",
         tags: [],
         priority: "Low Priority",
-        date:today
+        date: today
     });
     const [prioritySelect, setPrioritySelect] = useState(["Low Priority", "Medium Priority", "High Priority"]);
     const dispatch = useDispatch();
@@ -29,6 +29,16 @@ export const Editor = ({ setShow }) => {
         if (note.noteTitle) {
             setNote({ ...note, color: color })
             dispatch(createNote({ token, note }));
+            setNote({
+                ...note,
+                noteTitle: "",
+                noteBody: "",
+                color: "",
+                priority: "Low Priority",
+                date: today
+            })
+            dispatch(setColor(""));
+            dispatch(removeAllTags());
         }
     }
     const handleLabel = () => {
@@ -40,7 +50,7 @@ export const Editor = ({ setShow }) => {
     }
 
 
-    
+
 
     return <div className={!color ? "editor" : `editor ${color} `}>
         <div className="editor-header">
