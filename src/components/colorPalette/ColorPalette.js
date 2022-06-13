@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./ColorPalette.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setColor } from "../../features/notesSlice";
 export const ColorPalette = () => {
 

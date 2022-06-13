@@ -1,6 +1,17 @@
 
-import "./Note.css"
+import "./Note.css";
+import { useDispatch, useSelector } from "react-redux";
+import { loadArchive } from "../../features/notesSlice";
 export const Note = ({ note }) => {
+
+    const { token } = useSelector((state) => state.auth);
+    
+    const dispatch = useDispatch();
+
+    const handleArchive = () => {
+        dispatch(loadArchive({ token, note, noteId: note._id }))
+    }
+
     return <div className={`note ${note.color}`}>
         <div className="note-header">
             <h3>{note.noteTitle}</h3>
@@ -26,7 +37,7 @@ export const Note = ({ note }) => {
                 <span class="material-symbols-outlined">
                     edit
                 </span>
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined" onClick={handleArchive}>
                     archive
                 </span>
                 <span class="material-symbols-outlined">

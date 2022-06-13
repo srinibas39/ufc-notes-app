@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { ArchiveNote } from "../services/ArchiveNote";
 import { CreateNote } from "../services/CreateNote";
 
 const initialState = {
@@ -6,7 +7,8 @@ const initialState = {
     error: "",
     notes: [],
     labels: [],
-    color: ""
+    color: "",
+    archives: []
 }
 
 export const createNote = createAsyncThunk("notes/createNote",
@@ -20,6 +22,17 @@ export const createNote = createAsyncThunk("notes/createNote",
         }
     }
 )
+
+export const loadArchive = createAsyncThunk("notes/loadArchive",
+    async ({ token, note, noteId }, thunkAPI) => {
+        try {
+            const res = await ArchiveNote(token, note, noteId);
+            return res.data.archives;
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue(err.message);
+        }
+    })
 export const notesSlice = createSlice({
     name: "notes",
     initialState,
@@ -43,9 +56,20 @@ export const notesSlice = createSlice({
         },
         [createNote.fulfilled]: (state, action) => {
             state.loading = false;
-            state.notes=action.payload;
+            state.notes = action.payload;
         },
         [createNote.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        [loadArchive.pending]: (state) => {
+            state.loading = true;
+        },
+        [loadArchive.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.archives = action.payload;
+        },
+        [loadArchive.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         }
@@ -54,5 +78,5 @@ export const notesSlice = createSlice({
 
 })
 
-export const { loadTags, removeTags, setColor,removeAllTags } = notesSlice.actions;
+export const { loadTags, removeTags, setColor, removeAllTags } = notesSlice.actions;
 export default notesSlice.reducer;
