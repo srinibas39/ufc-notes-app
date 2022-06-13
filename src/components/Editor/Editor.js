@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createNote } from "../../features/notesSlice";
 import { ColorPalette } from "../colorPalette/ColorPalette"
 import "./Editor.css";
@@ -10,20 +10,30 @@ export const Editor = ({ setShow }) => {
         noteTitle: "",
         noteBody: "",
         color: "",
-        tags: []
+        tags: [],
+        priority: "Low Priority"
     });
+    const [prioritySelect, setPrioritySelect] = useState(["Low Priority", "Medium Priority", "High Priority"]);
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth);
     const { labels, color } = useSelector((state) => state.notes);
 
+    useEffect(() => {
+        setNote({ ...note, tags: labels })
+    }, [labels])
+
     const handleNote = () => {
-        if (note.noteTitle.length) {
-            setNote({ ...note, color: color, tags: labels })
+        if (note.noteTitle) {
+            setNote({ ...note, color: color })
+            dispatch(createNote({ token, note }));
         }
-        dispatch(createNote({ token, note }));
     }
     const handleLabel = () => {
         setShow(true)
+    }
+    const handlePriority = (priority) => {
+        setNote({ ...note, priority: priority })
+
     }
     return <div className={!color ? "editor" : `editor ${color} `}>
         <div className="editor-header">
@@ -47,10 +57,13 @@ export const Editor = ({ setShow }) => {
         </div>
         <div className="editor-footer">
             <small>6/11/2022, 12:04:50 PM</small>
-            <select>
-                <option>Low Priority</option>
-                <option>Medium Priority </option>
-                <option>High Priority</option>
+            <select onClick={(e) => handlePriority(e.target.value)}>
+                {
+                    prioritySelect.map((priority) => {
+                        return <option key={priority} value={priority}>{priority}</option>
+                    })
+                }
+
             </select>
             <div className="editor-option">
                 <span class="material-symbols-outlined" onClick={handleNote}>
