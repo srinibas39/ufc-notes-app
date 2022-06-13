@@ -5,7 +5,8 @@ const initialState = {
     loading: false,
     error: "",
     notes: [],
-    labels: []
+    labels: [],
+    color: ""
 }
 
 export const createNote = createAsyncThunk("notes/createNote",
@@ -28,6 +29,9 @@ export const notesSlice = createSlice({
         },
         removeTags: (state, action) => {
             state.labels.pop(action.payload)
+        },
+        setColor: (state, action) => {
+            state.color = action.payload;
         }
     },
     extraReducers: {
@@ -47,5 +51,5 @@ export const notesSlice = createSlice({
 
 })
 
-export const { loadTags,removeTags } = notesSlice.actions;
+export const { loadTags, removeTags , setColor} = notesSlice.actions;
 export default notesSlice.reducer;

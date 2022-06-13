@@ -9,18 +9,23 @@ export const Editor = ({ setShow }) => {
     const [note, setNote] = useState({
         noteTitle: "",
         noteBody: "",
+        color: "",
+        tags: []
     });
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth);
-
+    const { labels, color } = useSelector((state) => state.notes);
 
     const handleNote = () => {
-        dispatch(createNote({ token, note }))
+        if (note.noteTitle.length) {
+            setNote({ ...note, color: color, tags: labels })
+        }
+        dispatch(createNote({ token, note }));
     }
     const handleLabel = () => {
         setShow(true)
     }
-    return <div className="editor">
+    return <div className={!color ? "editor" : `editor ${color} `}>
         <div className="editor-header">
             <input type="text" placeholder="Type Title of the Note" value={note.noteTitle} onChange={(e) => setNote({ ...note, noteTitle: e.target.value })} />
             <span class="material-symbols-outlined">
@@ -31,9 +36,14 @@ export const Editor = ({ setShow }) => {
             <textarea placeholder="Type Body of the Text" value={note.noteBody} onChange={(e) => setNote({ ...note, noteBody: e.target.value })}></textarea>
         </div>
         <div className="editor-tags">
-            <button>tag 1</button>
-            <button>tag 1</button>
-            <button>tag 1</button>
+
+            {
+                labels && labels.map((label) => {
+                    return <button key={label}>{label}</button>
+                })
+            }
+
+
         </div>
         <div className="editor-footer">
             <small>6/11/2022, 12:04:50 PM</small>
