@@ -6,12 +6,15 @@ import "./Editor.css";
 import { useSelector, useDispatch } from "react-redux";
 
 export const Editor = ({ setShow }) => {
+    
+    const today=new Date().toLocaleString();
     const [note, setNote] = useState({
         noteTitle: "",
         noteBody: "",
         color: "",
         tags: [],
-        priority: "Low Priority"
+        priority: "Low Priority",
+        date:today
     });
     const [prioritySelect, setPrioritySelect] = useState(["Low Priority", "Medium Priority", "High Priority"]);
     const dispatch = useDispatch();
@@ -35,6 +38,10 @@ export const Editor = ({ setShow }) => {
         setNote({ ...note, priority: priority })
 
     }
+
+
+    
+
     return <div className={!color ? "editor" : `editor ${color} `}>
         <div className="editor-header">
             <input type="text" placeholder="Type Title of the Note" value={note.noteTitle} onChange={(e) => setNote({ ...note, noteTitle: e.target.value })} />
@@ -56,7 +63,7 @@ export const Editor = ({ setShow }) => {
 
         </div>
         <div className="editor-footer">
-            <small>6/11/2022, 12:04:50 PM</small>
+            <small>{today}</small>
             <select onClick={(e) => handlePriority(e.target.value)}>
                 {
                     prioritySelect.map((priority) => {
