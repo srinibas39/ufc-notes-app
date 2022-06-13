@@ -21,15 +21,15 @@ export const NavBar = () => {
             </svg>
         </div>
         <div className="navBar-content">
+            <div onClick={() => navigate("/profile")}>
+                <span className="material-icons-outlined"> person </span>
+            </div>
             <div onClick={() => navigate("/notes")}>
                 <span class="material-symbols-outlined">
                     speaker_notes
                 </span>
             </div>
 
-            <div onClick={() => navigate("/profile")}>
-                <span className="material-icons-outlined"> person </span>
-            </div>
             <div onClick={() => navigate("/archive")}>
                 <span class="material-symbols-outlined">
                     archive

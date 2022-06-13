@@ -1,31 +1,30 @@
-import { useLocation, useNavigate } from "react-router-dom"
-import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+
 
 import "./Login.css";
-import { useDispatch, useSelector } from "react-redux";
+
 import { loadLogin } from "../../features/authSlice";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
     const navigate = useNavigate();
+
     const [form, setForm] = useState({
-        username: "", password: ""
+        email: "", password: ""
     })
 
-    const { loading, token, user, error } = useSelector((state) => state.auth);
+
     const dispatch = useDispatch();
-  
+
     const handleSubmit = () => {
-
-        
-
-        dispatch(loadLogin({ username: form.username, password: form.password }))
-
+        dispatch(loadLogin({ email: form.email, password: form.password }))
     }
 
-  
+
 
     const handleGuest = () => {
-        setForm({ ...form, username: "srinibas khuntia", password: "srinibaskhuntia123" })
+        dispatch(loadLogin({ email: "srinibaskhuntia39@gmail.com", password: "srinibaskhuntia123"}))
     }
 
     return <div className="login-container">
@@ -33,8 +32,8 @@ export const Login = () => {
             <h2>Login</h2>
 
             <div className="email-container">
-                <label htmlFor="email">username</label>
-                <input type="email" name="username" value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} />
+                <label htmlFor="email">Email</label>
+                <input type="email" name="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
             </div>
             <div className="password-container">
                 <label htmlFor="password">Password</label>
