@@ -5,6 +5,7 @@ import { HomePage } from "./pages/HomePage";
 import { LabelPage } from "./pages/LabelPage";
 import { LoginPage } from "./pages/LoginPage";
 import { NotesPage } from "./pages/NotesPage";
+import { ProfilePage } from "./pages/ProfilePage";
 import { SignupPage } from "./pages/SignupPage";
 import { TrashPage } from "./pages/TrashPage";
 
@@ -18,6 +19,8 @@ export const App = () => {
       <Route path="/label" element={<LabelPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+
     </Routes>
   </>
 }
