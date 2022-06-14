@@ -5,11 +5,13 @@ import { LabelModal } from "../components/LabelModal/LabelModal"
 import { NavBar } from "../components/NavBar/NavBar"
 import { Note } from "../components/Note/Note";
 import { useSelector } from "react-redux";
+import { EditNotes } from "../components/EditNotes/EditNotes"
 
 
 export const NotesPage = () => {
-    const [show, setShow] = useState(false);
-    const { notes } = useSelector((state) => state.notes);
+    const [show, setShow] = useState(false);//label
+
+    const { notes,showEditor } = useSelector((state) => state.notes);
 
     const getPinnedNotes = () => {
         return notes && notes.filter((note) => note.pin)
@@ -50,5 +52,8 @@ export const NotesPage = () => {
         </div>
 
         <LabelModal show={show} setShow={setShow} />
+        {
+            showEditor && <EditNotes/>
+        }
     </>
 }

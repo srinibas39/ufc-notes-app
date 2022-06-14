@@ -61,7 +61,7 @@ export const Editor = ({ setShow }) => {
 
 
 
-    return <div className={!color ? "editor" : `editor ${color} `}>
+    return <div className={!color ? "editor" : `editor ${color} `} onClick={(e) => e.stopPropagation()} >
         <div className="editor-header">
             <input type="text" placeholder="Type Title of the Note" value={note.noteTitle} onChange={(e) => setNote({ ...note, noteTitle: e.target.value })} />
             {

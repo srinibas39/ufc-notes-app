@@ -1,7 +1,7 @@
 
 import "./Note.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteArchive, deleteNote, deleteTrash, loadArchive, loadTrash, restoreArchive, restoreTrash } from "../../features/notesSlice";
+import { deleteArchive, deleteNote, deleteTrash, loadArchive, loadTrash, restoreArchive, restoreTrash, setShowEditor, updateNote } from "../../features/notesSlice";
 import { useLocation } from "react-router-dom";
 export const Note = ({ note }) => {
 
@@ -37,6 +37,10 @@ export const Note = ({ note }) => {
             dispatch(deleteNote({ token, noteId: note._id }))
         }
     }
+    const handleEdit = () => {
+        // dispatch(updateNote({ token, note, noteId: note._id }))
+        dispatch(setShowEditor(true))
+    }
 
 
     return <div className={`note ${note.color}`}>
@@ -61,7 +65,7 @@ export const Note = ({ note }) => {
             <small>Created on {note.date}</small>
             <small>{note.priority}</small>
             <div className="note-options">
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined" onClick={handleEdit}>
                     edit
                 </span>
                 {

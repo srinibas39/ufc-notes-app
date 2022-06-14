@@ -7,6 +7,7 @@ import { DeleteTrash } from "../services/DeleteTrash";
 import { RestoreArchive } from "../services/RestoreArchive";
 import { RestoreTrash } from "../services/RestoreTrash";
 import { TrashNote } from "../services/TrashNote";
+import { UpdateNote } from "../services/UpdateNote";
 
 const initialState = {
     loading: false,
@@ -16,7 +17,8 @@ const initialState = {
     color: "",
     archives: [],
     trash: [],
-    allTags: []
+    allTags: [],
+    showEditor: false
 }
 
 export const createNote = createAsyncThunk("notes/createNote",
@@ -101,6 +103,16 @@ export const deleteNote = createAsyncThunk("notes/deleteNote",
             return thunkAPI.rejectWithValue(err.message);
         }
     })
+export const updateNote = createAsyncThunk("notes/updateNote",
+    async ({ token, note, noteId }, thunkAPI) => {
+        try {
+            const res = await UpdateNote(token, note, noteId);
+            return res.data;
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue(err.message);
+        }
+    })
 
 export const notesSlice = createSlice({
     name: "notes",
@@ -120,6 +132,9 @@ export const notesSlice = createSlice({
         },
         setAllTags: (state, action) => {
             state.allTags.push(action.payload);
+        },
+        setShowEditor: (state, action) => {
+            state.showEditor = action.payload;
         }
     },
     extraReducers: {
@@ -169,8 +184,7 @@ export const notesSlice = createSlice({
         [restoreArchive.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.payload;
-        }
-        ,
+        },
         [loadTrash.pending]: (state) => {
             state.loading = true;
         },
@@ -219,11 +233,25 @@ export const notesSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
+        [updateNote.pending]: (state) => {
+            state.loading = true;
+        },
+        [updateNote.fulfilled]: (state, action) => {
+            state.loading = false;
+            // state.notes = action.payload;
+            console.log(action.payload);
+
+        },
+        [updateNote.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+
     }
 
 
 })
 
 
-export const { loadTags, removeTags, setColor, removeAllTags, setAllTags } = notesSlice.actions;
+export const { loadTags, removeTags, setColor, removeAllTags, setAllTags,setShowEditor } = notesSlice.actions;
 export default notesSlice.reducer;

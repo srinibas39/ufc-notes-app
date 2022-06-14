@@ -3,6 +3,7 @@
   margin: 1rem;
   padding: 1rem;
   box-shadow: var(--box-shadow2);
+  background: var(--secondary-color);
 }
 
 .editor-header {
@@ -51,22 +52,23 @@
   align-items: center;
 }
 
-.editor-footer small,option,select  {
-    color: var(--primary-color);
-    outline: none;
-    cursor: pointer;
+.editor-footer small,
+option,
+select {
+  color: var(--primary-color);
+  outline: none;
+  cursor: pointer;
 }
 
-
-.editor span{
-    color: var(--primary-color);
-    cursor: pointer;
+.editor span {
+  color: var(--primary-color);
+  cursor: pointer;
 }
 
-.editor-option span{
-    margin: 0px 10px;
+.editor-option span {
+  margin: 0px 10px;
 }
 
 .editor-option {
-    position: relative;
+  position: relative;
 }
