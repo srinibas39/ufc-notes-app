@@ -1,28 +1,40 @@
 
 import "./Note.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteArchive, loadArchive, restoreArchive } from "../../features/notesSlice";
+import { deleteArchive, deleteTrash, loadArchive, loadTrash, restoreArchive, restoreTrash } from "../../features/notesSlice";
 import { useLocation } from "react-router-dom";
 export const Note = ({ note }) => {
 
     const { token } = useSelector((state) => state.auth);
-    const { archives } = useSelector((state) => state.notes);
+    const { archives , trash} = useSelector((state) => state.notes);
 
 
     const dispatch = useDispatch();
     const location = useLocation();
 
+
     const handleArchive = () => {
         dispatch(loadArchive({ token, note, noteId: note._id }))
     }
+    const handleTrash = () => {
+        dispatch(loadTrash({ token, note, noteId: note._id }))
+    }
+
     const restArchive = () => {
         dispatch(restoreArchive({ token, noteId: note._id }))
+    }
+    const restTrash = () => {
+        dispatch(restoreTrash({ token, noteId: note._id }))
     }
     const delNotes = () => {
         if (location.pathname === "/archive") {
             dispatch(deleteArchive({ token, noteId: note._id }))
         }
+        if (location.pathname === "/trash") {
+            dispatch(deleteTrash({ token, noteId: note._id }))
+        }
     }
+
 
     return <div className={`note ${note.color}`}>
         <div className="note-header">
@@ -56,10 +68,15 @@ export const Note = ({ note }) => {
                         archive
                     </span>
                 }
+                {
+                    trash.some((not) => not._id === note._id) ? <span class="material-symbols-sharp" onClick={restTrash}>
+                        delete
+                    </span> : <span class="material-symbols-outlined" onClick={handleTrash}>
+                        delete
+                    </span>
+                }
 
-                <span class="material-symbols-outlined">
-                    delete
-                </span>
+
                 <span class="material-symbols-outlined" onClick={delNotes}>
                     delete_forever
                 </span>

@@ -2,7 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ArchiveNote } from "../services/ArchiveNote";
 import { CreateNote } from "../services/CreateNote";
 import { DeleteArchive } from "../services/DeleteArchive";
+import { DeleteTrash } from "../services/DeleteTrash";
 import { RestoreArchive } from "../services/RestoreArchive";
+import { RestoreTrash } from "../services/RestoreTrash";
+import { TrashNote } from "../services/TrashNote";
 
 const initialState = {
     loading: false,
@@ -10,7 +13,8 @@ const initialState = {
     notes: [],
     labels: [],
     color: "",
-    archives: []
+    archives: [],
+    trash: []
 }
 
 export const createNote = createAsyncThunk("notes/createNote",
@@ -49,6 +53,36 @@ export const restoreArchive = createAsyncThunk("notes/restoreArchive",
     async ({ token, noteId }, thunkAPI) => {
         try {
             const res = await RestoreArchive(token, noteId);
+            return res.data;
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue(err.message);
+        }
+    })
+export const loadTrash = createAsyncThunk("notes/loadTrash",
+    async ({ token, note, noteId }, thunkAPI) => {
+        try {
+            const res = await TrashNote(token, note, noteId);
+            return res.data;
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue(err.message);
+        }
+    })
+export const deleteTrash = createAsyncThunk("notes/deleteTrash",
+    async ({ token, noteId }, thunkAPI) => {
+        try {
+            const res = await DeleteTrash(token, noteId);
+            return res.data.trash;
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue(err.message);
+        }
+    })
+export const restoreTrash = createAsyncThunk("notes/restoreTrash",
+    async ({ token, noteId }, thunkAPI) => {
+        try {
+            const res = await RestoreTrash(token, noteId);
             return res.data;
         }
         catch (err) {
@@ -102,8 +136,8 @@ export const notesSlice = createSlice({
         },
         [deleteArchive.fulfilled]: (state, action) => {
             state.loading = false;
-             state.archives = action.payload;
-           
+            state.archives = action.payload;
+
         },
         [deleteArchive.rejected]: (state, action) => {
             state.loading = false;
@@ -118,6 +152,43 @@ export const notesSlice = createSlice({
             state.notes = action.payload.notes;
         },
         [restoreArchive.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        }
+        ,
+        [loadTrash.pending]: (state) => {
+            state.loading = true;
+        },
+        [loadTrash.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.notes = action.payload.notes;
+            state.trash = action.payload.trash;
+        },
+        [loadTrash.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        [deleteTrash.pending]: (state) => {
+            state.loading = true;
+        },
+        [deleteTrash.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.trash = action.payload;
+
+        },
+        [deleteTrash.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        [restoreTrash.pending]: (state) => {
+            state.loading = true;
+        },
+        [restoreTrash.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.trash = action.payload.trash;
+            state.notes = action.payload.notes;
+        },
+        [restoreTrash.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         }
