@@ -14,7 +14,8 @@ export const Editor = ({ setShow }) => {
         color: "",
         tags: [],
         priority: "Low Priority",
-        date: today
+        date: today,
+        pin: false
     });
     const [prioritySelect, setPrioritySelect] = useState(["Low Priority", "Medium Priority", "High Priority"]);
     const dispatch = useDispatch();
@@ -53,15 +54,27 @@ export const Editor = ({ setShow }) => {
 
     }
 
+    const handlePin = () => {
+        note.pin ? setNote({ ...note, pin: false }) : setNote({ ...note, pin: true })
+    }
+
 
 
 
     return <div className={!color ? "editor" : `editor ${color} `}>
         <div className="editor-header">
             <input type="text" placeholder="Type Title of the Note" value={note.noteTitle} onChange={(e) => setNote({ ...note, noteTitle: e.target.value })} />
-            <span class="material-symbols-outlined">
-                push_pin
-            </span>
+            {
+                note.pin ?
+                    <span class="material-symbols-outlined" onClick={handlePin}>
+                        push_pin
+                    </span> :
+                    <span class="material-symbols-rounded" onClick={handlePin}>
+                        push_pin
+                    </span>
+
+            }
+
         </div>
         <div className="editor-body">
             <textarea placeholder="Type Body of the Text" value={note.noteBody} onChange={(e) => setNote({ ...note, noteBody: e.target.value })}></textarea>
