@@ -1,7 +1,7 @@
 
 
 import { useState } from "react"
-import { loadTags, removeTags } from "../../features/notesSlice";
+import { loadTags, removeTags, setAllTags } from "../../features/notesSlice";
 import "./LabelModal.css";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,7 +10,7 @@ export const LabelModal = ({ show, setShow }) => {
     const [tags, setTags] = useState([]);
     const [input, setInput] = useState("");
     const dispatch = useDispatch();
-    const { labels } = useSelector((state) => state.notes)
+    const { labels, allTags } = useSelector((state) => state.notes)
 
 
 
@@ -18,6 +18,7 @@ export const LabelModal = ({ show, setShow }) => {
         if (input && !tags.includes(input)) {
             setTags([...tags, input]);
             setInput("");
+            dispatch(setAllTags(input))
         }
 
     }
@@ -42,7 +43,7 @@ export const LabelModal = ({ show, setShow }) => {
                         </span></button>
                     </div>
                     {
-                        tags && tags.map((tag) => {
+                        allTags && allTags.map((tag) => {
                             return <li key={tag}><input type="checkbox"
                                 onChange={() => handleLabel(tag)}
                                 style={{ marginRight: "5px", cursor: "pointer" }}
