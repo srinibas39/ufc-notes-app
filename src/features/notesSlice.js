@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ArchiveNote } from "../services/ArchiveNote";
 import { CreateNote } from "../services/CreateNote";
 import { DeleteArchive } from "../services/DeleteArchive";
+import { DeleteNote } from "../services/DeleteNote";
 import { DeleteTrash } from "../services/DeleteTrash";
 import { RestoreArchive } from "../services/RestoreArchive";
 import { RestoreTrash } from "../services/RestoreTrash";
@@ -85,6 +86,16 @@ export const restoreTrash = createAsyncThunk("notes/restoreTrash",
         try {
             const res = await RestoreTrash(token, noteId);
             return res.data;
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue(err.message);
+        }
+    })
+export const deleteNote = createAsyncThunk("notes/deleteNote",
+    async ({ token, noteId }, thunkAPI) => {
+        try {
+            const res = await DeleteNote(token, noteId);
+            return res.data.notes;
         }
         catch (err) {
             return thunkAPI.rejectWithValue(err.message);
@@ -195,7 +206,19 @@ export const notesSlice = createSlice({
         [restoreTrash.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.payload;
-        }
+        },
+        [deleteNote.pending]: (state) => {
+            state.loading = true;
+        },
+        [deleteNote.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.notes = action.payload;
+
+        },
+        [deleteNote.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
     }
 
 

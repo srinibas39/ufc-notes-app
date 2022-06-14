@@ -1,12 +1,12 @@
 
 import "./Note.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteArchive, deleteTrash, loadArchive, loadTrash, restoreArchive, restoreTrash } from "../../features/notesSlice";
+import { deleteArchive, deleteNote, deleteTrash, loadArchive, loadTrash, restoreArchive, restoreTrash } from "../../features/notesSlice";
 import { useLocation } from "react-router-dom";
 export const Note = ({ note }) => {
 
     const { token } = useSelector((state) => state.auth);
-    const { archives , trash} = useSelector((state) => state.notes);
+    const { archives, trash } = useSelector((state) => state.notes);
 
 
     const dispatch = useDispatch();
@@ -32,6 +32,9 @@ export const Note = ({ note }) => {
         }
         if (location.pathname === "/trash") {
             dispatch(deleteTrash({ token, noteId: note._id }))
+        }
+        if (location.pathname === "/notes") {
+            dispatch(deleteNote({ token, noteId: note._id }))
         }
     }
 
