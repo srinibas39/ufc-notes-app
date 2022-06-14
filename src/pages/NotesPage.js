@@ -10,17 +10,40 @@ import { useSelector } from "react-redux";
 export const NotesPage = () => {
     const [show, setShow] = useState(false);
     const { notes } = useSelector((state) => state.notes);
+
+    const getPinnedNotes = () => {
+        return notes && notes.filter((note) => note.pin)
+    }
+    const pinnedNotes = getPinnedNotes();
+
+    const getOtherNotes = () => {
+        return notes && notes.filter((note) => !note.pin)
+    }
+    const otherNotes = getOtherNotes();
     return <>
         <NavBar />
         <AutoComplete />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
             <Editor setShow={setShow} />
             {
-                notes.length ? <h2 className="primary-color">ALL NOTES</h2>:""
+                notes.length ? <h2 className="primary-color">ALL NOTES</h2> : ""
             }
 
             {
-                notes && notes.map((note) => {
+                pinnedNotes.length ? <h3 className="primary-color" style={{ margin: "1rem" }}>PINNED</h3> : ""
+            }
+
+            {
+                pinnedNotes && pinnedNotes.map((note) => {
+                    return <Note note={note} key={note._id} />
+                })
+            }
+            {
+                otherNotes.length ? <h3 className="primary-color" style={{ margin: "1rem" }}>OTHERS</h3> : ""
+            }
+
+            {
+                otherNotes && otherNotes.map((note) => {
                     return <Note note={note} key={note._id} />
                 })
             }
