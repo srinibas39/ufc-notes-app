@@ -2,6 +2,7 @@
 import "./Note.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteArchive, loadArchive, restoreArchive } from "../../features/notesSlice";
+import { useLocation } from "react-router-dom";
 export const Note = ({ note }) => {
 
     const { token } = useSelector((state) => state.auth);
@@ -9,12 +10,18 @@ export const Note = ({ note }) => {
 
 
     const dispatch = useDispatch();
+    const location = useLocation();
 
     const handleArchive = () => {
         dispatch(loadArchive({ token, note, noteId: note._id }))
     }
     const restArchive = () => {
         dispatch(restoreArchive({ token, noteId: note._id }))
+    }
+    const delNotes = () => {
+        if (location.pathname === "/archive") {
+            dispatch(deleteArchive({ token, noteId: note._id }))
+        }
     }
 
     return <div className={`note ${note.color}`}>
@@ -53,7 +60,7 @@ export const Note = ({ note }) => {
                 <span class="material-symbols-outlined">
                     delete
                 </span>
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined" onClick={delNotes}>
                     delete_forever
                 </span>
             </div>

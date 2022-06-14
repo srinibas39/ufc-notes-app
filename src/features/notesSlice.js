@@ -39,7 +39,7 @@ export const deleteArchive = createAsyncThunk("notes/deleteArchive",
     async ({ token, noteId }, thunkAPI) => {
         try {
             const res = await DeleteArchive(token, noteId);
-            return res.data;
+            return res.data.archives;
         }
         catch (err) {
             return thunkAPI.rejectWithValue(err.message);
@@ -102,7 +102,8 @@ export const notesSlice = createSlice({
         },
         [deleteArchive.fulfilled]: (state, action) => {
             state.loading = false;
-            state.archives = action.payload;
+             state.archives = action.payload;
+           
         },
         [deleteArchive.rejected]: (state, action) => {
             state.loading = false;
