@@ -1,15 +1,20 @@
 
 import "./Note.css";
 import { useDispatch, useSelector } from "react-redux";
-import { loadArchive } from "../../features/notesSlice";
+import { deleteArchive, loadArchive, restoreArchive } from "../../features/notesSlice";
 export const Note = ({ note }) => {
 
     const { token } = useSelector((state) => state.auth);
-    
+    const { archives } = useSelector((state) => state.notes);
+
+
     const dispatch = useDispatch();
 
     const handleArchive = () => {
         dispatch(loadArchive({ token, note, noteId: note._id }))
+    }
+    const restArchive = () => {
+        dispatch(restoreArchive({ token, noteId: note._id }))
     }
 
     return <div className={`note ${note.color}`}>
@@ -37,9 +42,14 @@ export const Note = ({ note }) => {
                 <span class="material-symbols-outlined">
                     edit
                 </span>
-                <span class="material-symbols-outlined" onClick={handleArchive}>
-                    archive
-                </span>
+                {
+                    archives.some((not) => not._id === note._id) ? <span class="material-symbols-sharp" onClick={restArchive}>
+                        archive
+                    </span> : <span class="material-symbols-outlined" onClick={handleArchive}>
+                        archive
+                    </span>
+                }
+
                 <span class="material-symbols-outlined">
                     delete
                 </span>

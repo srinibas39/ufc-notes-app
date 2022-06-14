@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ArchiveNote } from "../services/ArchiveNote";
 import { CreateNote } from "../services/CreateNote";
+import { DeleteArchive } from "../services/DeleteArchive";
+import { RestoreArchive } from "../services/RestoreArchive";
 
 const initialState = {
     loading: false,
@@ -27,12 +29,33 @@ export const loadArchive = createAsyncThunk("notes/loadArchive",
     async ({ token, note, noteId }, thunkAPI) => {
         try {
             const res = await ArchiveNote(token, note, noteId);
-            return res.data.archives;
+            return res.data;
         }
         catch (err) {
             return thunkAPI.rejectWithValue(err.message);
         }
     })
+export const deleteArchive = createAsyncThunk("notes/deleteArchive",
+    async ({ token, noteId }, thunkAPI) => {
+        try {
+            const res = await DeleteArchive(token, noteId);
+            return res.data;
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue(err.message);
+        }
+    })
+export const restoreArchive = createAsyncThunk("notes/restoreArchive",
+    async ({ token, noteId }, thunkAPI) => {
+        try {
+            const res = await RestoreArchive(token, noteId);
+            return res.data;
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue(err.message);
+        }
+    })
+
 export const notesSlice = createSlice({
     name: "notes",
     initialState,
@@ -67,9 +90,33 @@ export const notesSlice = createSlice({
         },
         [loadArchive.fulfilled]: (state, action) => {
             state.loading = false;
-            state.archives = action.payload;
+            state.notes = action.payload.notes;
+            state.archives = action.payload.archives;
         },
         [loadArchive.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        [deleteArchive.pending]: (state) => {
+            state.loading = true;
+        },
+        [deleteArchive.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.archives = action.payload;
+        },
+        [deleteArchive.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        [restoreArchive.pending]: (state) => {
+            state.loading = true;
+        },
+        [restoreArchive.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.archives = action.payload.archives;
+            state.notes = action.payload.notes;
+        },
+        [restoreArchive.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         }
@@ -77,6 +124,7 @@ export const notesSlice = createSlice({
 
 
 })
+
 
 export const { loadTags, removeTags, setColor, removeAllTags } = notesSlice.actions;
 export default notesSlice.reducer;

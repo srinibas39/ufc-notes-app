@@ -10,9 +10,9 @@ export const ArchivePage = () => {
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
             <h2 className="primary-color">ARCHIVES</h2>
             {
-                archives ? archives.map((note) => {
+                archives && archives.map((note) => {
                     return <Note note={note} key={note._id} />
-                }) : ""
+                }) 
             }
         </div>
     </>

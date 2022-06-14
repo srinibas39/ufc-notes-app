@@ -66,7 +66,7 @@ export const Editor = ({ setShow }) => {
             <input type="text" placeholder="Type Title of the Note" value={note.noteTitle} onChange={(e) => setNote({ ...note, noteTitle: e.target.value })} />
             {
                 note.pin ?
-                    <span class="material-symbols-outlined" onClick={handlePin}>
+                    <span class="material-symbols-sharp" onClick={handlePin}>
                         push_pin
                     </span> :
                     <span class="material-symbols-rounded" onClick={handlePin}>
@@ -74,7 +74,6 @@ export const Editor = ({ setShow }) => {
                     </span>
 
             }
-
         </div>
         <div className="editor-body">
             <textarea placeholder="Type Body of the Text" value={note.noteBody} onChange={(e) => setNote({ ...note, noteBody: e.target.value })}></textarea>
