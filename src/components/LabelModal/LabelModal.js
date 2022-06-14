@@ -15,7 +15,7 @@ export const LabelModal = ({ show, setShow }) => {
 
 
     const handleAdd = () => {
-        if (input && !tags.includes(input)) {
+        if (input && !tags.includes(input) && !allTags.includes(input)) {
             setTags([...tags, input]);
             setInput("");
             dispatch(setAllTags(input))
