@@ -1,7 +1,7 @@
 
 import "./Note.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteArchive, deleteNote, deleteTrash, loadArchive, loadTrash, restoreArchive, restoreTrash, setShowEditor, updateNote } from "../../features/notesSlice";
+import { deleteArchive, deleteNote, deleteTrash, loadArchive, loadTrash, restoreArchive, restoreTrash, setEditNote, setShowEditor, updateNote } from "../../features/notesSlice";
 import { useLocation } from "react-router-dom";
 export const Note = ({ note }) => {
 
@@ -38,8 +38,8 @@ export const Note = ({ note }) => {
         }
     }
     const handleEdit = () => {
-        // dispatch(updateNote({ token, note, noteId: note._id }))
-        dispatch(setShowEditor(true))
+        dispatch(setShowEditor(true));
+        dispatch(setEditNote(note))
     }
 
 

@@ -1,9 +1,9 @@
-
 import { useEffect, useState } from "react";
-import { createNote, removeAllTags, setColor } from "../../features/notesSlice";
+import { createNote, removeAllTags, setColor, setEditNote, setShowEditor, updateNote } from "../../features/notesSlice";
 import { ColorPalette } from "../colorPalette/ColorPalette"
 import "./Editor.css";
 import { useSelector, useDispatch } from "react-redux";
+
 
 export const Editor = ({ setShow }) => {
 
@@ -17,10 +17,11 @@ export const Editor = ({ setShow }) => {
         date: today,
         pin: false
     });
+
     const [prioritySelect, setPrioritySelect] = useState(["Low Priority", "Medium Priority", "High Priority"]);
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth);
-    const { labels, color } = useSelector((state) => state.notes);
+    const { labels, color, editNote, showEditor } = useSelector((state) => state.notes);
 
     useEffect(() => {
         setNote({ ...note, tags: labels })
@@ -30,20 +31,38 @@ export const Editor = ({ setShow }) => {
         setNote({ ...note, color: color })
     }, [color])
 
-    const handleNote = () => {
-        if (note.noteTitle) {
-            dispatch(createNote({ token, note }));
-            setNote({
-                ...note,
-                noteTitle: "",
-                noteBody: "",
-                color: "",
-                priority: "Low Priority",
-                date: today
-            })
-            dispatch(setColor(""));
-            dispatch(removeAllTags());
+
+    useEffect(() => {
+        if (showEditor) {
+            setNote(editNote);
+            // console.log("hello");
         }
+    }, [showEditor])
+
+
+    const handleNote = () => {
+
+        if (note.noteTitle) {
+
+            if (showEditor && editNote) {
+                dispatch(updateNote({ token, note, noteId: editNote._id }));
+                dispatch(setEditNote({}));
+                dispatch(setShowEditor(false));
+            }
+            else {
+                dispatch(createNote({ token, note }));
+            }
+        }
+        setNote({
+            ...note,
+            noteTitle: "",
+            noteBody: "",
+            color: "",
+            priority: "Low Priority",
+            date: today
+        })
+        dispatch(setColor(""));
+        dispatch(removeAllTags());
     }
     const handleLabel = () => {
         setShow(true)
@@ -51,15 +70,11 @@ export const Editor = ({ setShow }) => {
 
     const handlePriority = (priority) => {
         setNote({ ...note, priority: priority })
-
     }
 
     const handlePin = () => {
         note.pin ? setNote({ ...note, pin: false }) : setNote({ ...note, pin: true })
     }
-
-
-
 
     return <div className={!color ? "editor" : `editor ${color} `} onClick={(e) => e.stopPropagation()} >
         <div className="editor-header">
@@ -90,7 +105,7 @@ export const Editor = ({ setShow }) => {
         </div>
         <div className="editor-footer">
             <small>{today}</small>
-            <select onClick={(e) => handlePriority(e.target.value)}>
+            <select onChange={(e) => handlePriority(e.target.value)}>
                 {
                     prioritySelect.map((priority) => {
                         return <option key={priority} value={priority}>{priority}</option>

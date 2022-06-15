@@ -18,7 +18,8 @@ const initialState = {
     archives: [],
     trash: [],
     allTags: [],
-    showEditor: false
+    showEditor: false,
+    editNote: {}
 }
 
 export const createNote = createAsyncThunk("notes/createNote",
@@ -107,7 +108,7 @@ export const updateNote = createAsyncThunk("notes/updateNote",
     async ({ token, note, noteId }, thunkAPI) => {
         try {
             const res = await UpdateNote(token, note, noteId);
-            return res.data;
+            return res.data.notes;
         }
         catch (err) {
             return thunkAPI.rejectWithValue(err.message);
@@ -135,7 +136,11 @@ export const notesSlice = createSlice({
         },
         setShowEditor: (state, action) => {
             state.showEditor = action.payload;
+        },
+        setEditNote: (state, action) => {
+            state.editNote = action.payload;
         }
+
     },
     extraReducers: {
         [createNote.pending]: (state) => {
@@ -238,9 +243,7 @@ export const notesSlice = createSlice({
         },
         [updateNote.fulfilled]: (state, action) => {
             state.loading = false;
-            // state.notes = action.payload;
-            console.log(action.payload);
-
+            state.notes = action.payload;
         },
         [updateNote.rejected]: (state, action) => {
             state.loading = false;
@@ -253,5 +256,5 @@ export const notesSlice = createSlice({
 })
 
 
-export const { loadTags, removeTags, setColor, removeAllTags, setAllTags,setShowEditor } = notesSlice.actions;
+export const { loadTags, removeTags, setColor, removeAllTags, setAllTags, setShowEditor, setEditNote } = notesSlice.actions;
 export default notesSlice.reducer;

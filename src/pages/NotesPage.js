@@ -11,7 +11,7 @@ import { EditNotes } from "../components/EditNotes/EditNotes"
 export const NotesPage = () => {
     const [show, setShow] = useState(false);//label
 
-    const { notes,showEditor } = useSelector((state) => state.notes);
+    const { notes, showEditor } = useSelector((state) => state.notes);
 
     const getPinnedNotes = () => {
         return notes && notes.filter((note) => note.pin)
@@ -50,10 +50,12 @@ export const NotesPage = () => {
                 })
             }
         </div>
-
-        <LabelModal show={show} setShow={setShow} />
         {
-            showEditor && <EditNotes/>
+            show && <LabelModal show={show} setShow={setShow} />
+        }
+
+        {
+            showEditor && <EditNotes show={show} setShow={setShow} />
         }
     </>
 }

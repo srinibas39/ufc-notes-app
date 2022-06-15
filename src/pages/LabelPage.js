@@ -2,7 +2,8 @@
 import { NavBar } from "../components/NavBar/NavBar"
 import { Note } from "../components/Note/Note";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { v4 as uuid } from "uuid";
 
 export const LabelPage = () => {
 
@@ -13,7 +14,7 @@ export const LabelPage = () => {
             <h2 className="primary-color" style={{ marginBottom: "1rem" }}>ALL LABELS</h2>
             {
                 notes.length ? allTags.map((label) => {
-                    return <>
+                    return <React.Fragment key={uuid()}>
                         {
                             notes.some((el) => el.tags.some((ele) => ele === label)) &&
                             <h2 className="primary-color" style={{ textTransform: "uppercase" }} key={label}>{label}</h2>
@@ -26,7 +27,7 @@ export const LabelPage = () => {
                                 }
                             })
                         }
-                    </>
+                    </React.Fragment>
                 }) : ""
             }
         </div>

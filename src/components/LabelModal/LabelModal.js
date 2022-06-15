@@ -34,7 +34,7 @@ export const LabelModal = ({ show, setShow }) => {
 
     return <>
         {
-            show && <div className="label-modal-container">
+             <div className="label-modal-container">
                 <ul className="label-modal" >
                     <div className="label-header">
                         <p>Add To label</p>
