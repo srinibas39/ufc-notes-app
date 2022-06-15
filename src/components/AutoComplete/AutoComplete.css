@@ -2,12 +2,14 @@
   background-color: var(--primary-color);
   color: var(--secondary-color);
   cursor: pointer;
+ 
 }
 
 .search-con {
   margin: 1rem;
   box-shadow: var(--box-shadow2);
   position: relative;
+  width: 40rem;
 }
 
 .search-con input {

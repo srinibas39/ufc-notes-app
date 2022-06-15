@@ -6,12 +6,13 @@ import { NavBar } from "../components/NavBar/NavBar"
 import { Note } from "../components/Note/Note";
 import { useSelector } from "react-redux";
 import { EditNotes } from "../components/EditNotes/EditNotes"
+import { FilterNote } from "../components/FilterNote/FilterNote"
 
 
 export const NotesPage = () => {
     const [show, setShow] = useState(false);//label
 
-    const { notes, showEditor } = useSelector((state) => state.notes);
+    const { notes, showEditor, showFilter } = useSelector((state) => state.notes);
 
     const getPinnedNotes = () => {
         return notes && notes.filter((note) => note.pin)
@@ -24,8 +25,8 @@ export const NotesPage = () => {
     const otherNotes = getOtherNotes();
     return <>
         <NavBar />
-        <AutoComplete />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+            <AutoComplete />
             <Editor setShow={setShow} />
             {
                 notes.length ? <h2 className="primary-color">ALL NOTES</h2> : ""
@@ -56,6 +57,9 @@ export const NotesPage = () => {
 
         {
             showEditor && <EditNotes show={show} setShow={setShow} />
+        }
+        {
+            showFilter && <FilterNote />
         }
     </>
 }

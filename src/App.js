@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { EditNotes } from "./components/EditNotes/EditNotes";
+
 import { ArchivePage } from "./pages/ArchivePage";
+import { FilteredNotesPage } from "./pages/FilteredNotesPage";
 import { HomePage } from "./pages/HomePage";
 import { LabelPage } from "./pages/LabelPage";
 import { LoginPage } from "./pages/LoginPage";
@@ -9,6 +10,7 @@ import { NotesPage } from "./pages/NotesPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { SignupPage } from "./pages/SignupPage";
 import { TrashPage } from "./pages/TrashPage";
+
 
 export const App = () => {
   return <>
@@ -21,8 +23,8 @@ export const App = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/edit" element={<EditNotes />} />
-
+      <Route path="/filter" element={<FilteredNotesPage/>} />
+     
     </Routes>
   </>
 }

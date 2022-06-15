@@ -3,9 +3,13 @@
 // import { useNavigate } from "react-router-dom";
 // import { useProduct } from "../../context/ProductContext/ProductContext";
 
+import { useDispatch } from "react-redux"
+import { setShowFilter } from "../../features/notesSlice";
 import "./AutoComplete.css"
 
 export const AutoComplete = () => {
+
+    const dispatch = useDispatch();
 
     // const { prodState } = useProduct();
     // const suggestion = prodState.suggestion;
@@ -48,15 +52,20 @@ export const AutoComplete = () => {
     //     }
     // }
 
+
+    const handleConfig = () => {
+        dispatch(setShowFilter(true))
+    }
+
     return <div className="search-con">
         {/* value={input} onChange={(e) => handleChange(e)} */}
         {/* onKeyDown={(e) => handleKeyDown(e)} */}
-        <input type="search"
+        <input type="text"
 
             placeholder={"Type To search"} />
         {/* onClick={() => handleSearch()} */}
         <span className="material-icons-outlined search-icon" > search </span>
-        <span className="material-symbols-outlined sort-conf">
+        <span className="material-symbols-outlined sort-conf" onClick={handleConfig}>
             tune
         </span>
         {/* {

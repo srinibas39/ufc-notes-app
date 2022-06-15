@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 .filter {
-  height: 24rem;
+  min-height: 24rem;
   width: 16rem;
   display: flex;
   flex-direction: column;
@@ -36,6 +36,8 @@
 .sort-by select,
 .filter-by select {
   height: 2rem;
+  height: 2rem;
+  border: 1px solid;
 }
 
 .sort-list,

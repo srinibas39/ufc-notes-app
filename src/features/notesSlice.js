@@ -19,7 +19,9 @@ const initialState = {
     trash: [],
     allTags: [],
     showEditor: false,
-    editNote: {}
+    editNote: {},
+    showFilter: false,
+    filter:{}
 }
 
 export const createNote = createAsyncThunk("notes/createNote",
@@ -139,6 +141,12 @@ export const notesSlice = createSlice({
         },
         setEditNote: (state, action) => {
             state.editNote = action.payload;
+        },
+        setShowFilter: (state, action) => {
+            state.showFilter = action.payload;
+        },
+        loadFilter:(state,action)=>{
+            state.filter=action.payload
         }
 
     },
@@ -256,5 +264,5 @@ export const notesSlice = createSlice({
 })
 
 
-export const { loadTags, removeTags, setColor, removeAllTags, setAllTags, setShowEditor, setEditNote } = notesSlice.actions;
+export const { loadTags, removeTags, setColor, removeAllTags, setAllTags, setShowEditor, setEditNote, setShowFilter,loadFilter } = notesSlice.actions;
 export default notesSlice.reducer;

@@ -52,3 +52,16 @@
 .color9 {
   background-color: #e879f9;
 }
+
+.btn-home {
+  margin: 1rem;
+  background: var(--primary-color);
+  height: 2rem;
+  width: 9rem;
+  color: var(--secondary-color);
+  cursor: pointer;
+}
+
+.btn-home:hover {
+  background-color: var(--primary-color2);
+}
