@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -10,21 +11,23 @@ import { NotesPage } from "./pages/NotesPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { SignupPage } from "./pages/SignupPage";
 import { TrashPage } from "./pages/TrashPage";
+import { PrivateRoute } from "./PrivateRoute/PrivateRoute";
 
 
 export const App = () => {
+  const { token } = useSelector((state) => state.auth)
   return <>
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/notes" element={<NotesPage />} />
-      <Route path="/archive" element={<ArchivePage />} />
-      <Route path="/trash" element={<TrashPage />} />
-      <Route path="/label" element={<LabelPage />} />
+      <Route path="/notes" element={<PrivateRoute token={token}><NotesPage /></PrivateRoute>} />
+      <Route path="/archive" element={<PrivateRoute token={token}><ArchivePage /></PrivateRoute>} />
+      <Route path="/trash" element={<PrivateRoute token={token}><TrashPage /></PrivateRoute>} />
+      <Route path="/label" element={<PrivateRoute token={token}><LabelPage /></PrivateRoute>} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/filter" element={<FilteredNotesPage/>} />
-     
+      <Route path="/profile" element={<PrivateRoute token={token}><ProfilePage /></PrivateRoute>} />
+      <Route path="/filter" element={<PrivateRoute token={token}><FilteredNotesPage /></PrivateRoute>} />
+
     </Routes>
   </>
 }

@@ -1,21 +1,39 @@
-import { useNavigate } from "react-router-dom"
-import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
 
 
 import "./Login.css";
 
 import { loadLogin } from "../../features/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Login = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const dispatch = useDispatch();
+    const { token } = useSelector((state) => state.auth);
 
     const [form, setForm] = useState({
         email: "", password: ""
     })
 
 
-    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        if (token) {
+            if (location?.state?.from?.pathname === undefined) {
+                navigate("/notes")
+            }
+            else {
+
+                navigate(`${location?.state?.from?.pathname}`);
+            }
+        }
+    }, [token])
+
+
+
 
     const handleSubmit = () => {
         dispatch(loadLogin({ email: form.email, password: form.password }))
@@ -24,7 +42,7 @@ export const Login = () => {
 
 
     const handleGuest = () => {
-        dispatch(loadLogin({ email: "srinibaskhuntia39@gmail.com", password: "srinibaskhuntia123"}))
+        dispatch(loadLogin({ email: "srinibaskhuntia39@gmail.com", password: "srinibaskhuntia123" }))
     }
 
     return <div className="login-container">
