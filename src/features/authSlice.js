@@ -9,7 +9,8 @@ const initialState = {
     loading: false,
     token: JSON.parse(localStorage.getItem("login"))?.token,
     user: JSON.parse(localStorage.getItem("login"))?.user,
-    error: null
+    error: null,
+    authType: ""
 }
 
 export const loadLogin = createAsyncThunk("auth/loadLogin",
@@ -54,6 +55,8 @@ export const authSlice = createSlice({
             state.loading = false;
             state.user = action.payload.foundUser;
             state.token = action.payload.encodedToken;
+            state.authType = "login";
+
             localStorage.setItem("login", JSON.stringify({
                 token: action.payload.encodedToken,
                 user: action.payload.foundUser
@@ -69,12 +72,13 @@ export const authSlice = createSlice({
             state.loading = true;
         },
         [loadSignup.fulfilled]: (state, action) => {
+            state.authType = "signup";
             state.loading = false;
-            state.user = action.payload.foundUser;
+            state.user = action.payload.createdUser;
             state.token = action.payload.encodedToken;
             localStorage.setItem("login", JSON.stringify({
                 token: action.payload.encodedToken,
-                user: action.payload.foundUser
+                user: action.payload.createdUser
             }))
 
         },

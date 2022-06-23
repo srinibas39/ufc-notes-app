@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./Signup.css"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadSignup } from "../../features/authSlice";
 
 export const Signup = () => {
@@ -15,12 +15,22 @@ export const Signup = () => {
         password: ""
     });
 
+    const { token } = useSelector((state) => state.auth)
+
 
     const dispatch = useDispatch();
 
     const handleSubmit = () => {
-        dispatch(loadSignup(form))
+        dispatch(loadSignup(form));
+
     }
+    useEffect(() => {
+        if (token) {
+            navigate("/notes");
+        }
+    }, [token])
+
+
     return <div className="signup-container">
         <div className="signup">
             <h2>Sign up</h2>
