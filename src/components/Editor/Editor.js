@@ -81,10 +81,10 @@ export const Editor = ({ setShow }) => {
             <input type="text" placeholder="Type Title of the Note" value={note.noteTitle} onChange={(e) => setNote({ ...note, noteTitle: e.target.value })} />
             {
                 note.pin ?
-                    <span class="material-symbols-sharp" onClick={handlePin}>
+                    <span className="material-symbols-sharp" onClick={handlePin}>
                         push_pin
                     </span> :
-                    <span class="material-symbols-rounded" onClick={handlePin}>
+                    <span className="material-symbols-rounded" onClick={handlePin}>
                         push_pin
                     </span>
 
@@ -114,11 +114,11 @@ export const Editor = ({ setShow }) => {
 
             </select>
             <div className="editor-option">
-                <span class="material-symbols-outlined" onClick={handleNote}>
+                <span className="material-symbols-outlined" onClick={handleNote}>
                     check_circle
                 </span>
                 <ColorPalette />
-                <span class="material-symbols-outlined" onClick={handleLabel}>
+                <span className="material-symbols-outlined" onClick={handleLabel}>
                     label
                 </span>
             </div>

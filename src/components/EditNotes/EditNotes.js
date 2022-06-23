@@ -5,7 +5,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { setShowEditor } from "../../features/notesSlice";
 
 export const EditNotes = ({show ,setShow}) => {
-    const { showEditor } = useSelector((state) => state.notes);
+    
     const dispatch = useDispatch();
     const handleEditor = () => {
         dispatch(setShowEditor(false))

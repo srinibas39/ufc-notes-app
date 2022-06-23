@@ -17,7 +17,7 @@ export const ColorPalette = () => {
 
     return <>
 
-        <span class="material-symbols-outlined" onClick={() => setColors(!colors)}>
+        <span className="material-symbols-outlined" onClick={() => setColors(!colors)}>
             palette
         </span>
 

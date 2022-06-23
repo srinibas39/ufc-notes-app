@@ -46,7 +46,7 @@ export const Note = ({ note }) => {
     return <div className={`note ${note.color}`}>
         <div className="note-header">
             <h3>{note.noteTitle}</h3>
-            <span class="material-symbols-outlined">
+            <span className="material-symbols-outlined">
                 push_pin
             </span>
         </div>
@@ -65,26 +65,26 @@ export const Note = ({ note }) => {
             <small>Created on {note.date}</small>
             <small>{note.priority}</small>
             <div className="note-options">
-                <span class="material-symbols-outlined" onClick={handleEdit}>
+                <span className="material-symbols-outlined" onClick={handleEdit}>
                     edit
                 </span>
                 {
-                    archives.some((not) => not._id === note._id) ? <span class="material-symbols-sharp" onClick={restArchive}>
+                    archives.some((not) => not._id === note._id) ? <span className="material-symbols-sharp" onClick={restArchive}>
                         archive
-                    </span> : <span class="material-symbols-outlined" onClick={handleArchive}>
+                    </span> : <span className="material-symbols-outlined" onClick={handleArchive}>
                         archive
                     </span>
                 }
                 {
-                    trash.some((not) => not._id === note._id) ? <span class="material-symbols-sharp" onClick={restTrash}>
+                    trash.some((not) => not._id === note._id) ? <span className="material-symbols-sharp" onClick={restTrash}>
                         delete
-                    </span> : <span class="material-symbols-outlined" onClick={handleTrash}>
+                    </span> : <span className="material-symbols-outlined" onClick={handleTrash}>
                         delete
                     </span>
                 }
 
 
-                <span class="material-symbols-outlined" onClick={delNotes}>
+                <span className="material-symbols-outlined" onClick={delNotes}>
                     delete_forever
                 </span>
             </div>

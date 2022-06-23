@@ -25,23 +25,23 @@ export const NavBar = () => {
                 <span className="material-icons-outlined"> person </span>
             </div>
             <div onClick={() => navigate("/notes")}>
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                     speaker_notes
                 </span>
             </div>
 
             <div onClick={() => navigate("/archive")}>
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                     archive
                 </span>
             </div>
             <div onClick={() => navigate("/trash")}>
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                     delete
                 </span>
             </div>
             <div onClick={() => navigate("/label")}>
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                     label
                 </span>
             </div>

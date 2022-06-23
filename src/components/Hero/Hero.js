@@ -4,7 +4,6 @@ import HeroSvg from "../../utils/Hero.svg"
 import "./Hero.css"
 export const Hero = () => {
     const navigate = useNavigate();
-    const { token } = useSelector((state) => state.auth);
     return <div className="hero-container">
         <div className="hero">
             <div className="hero-container-text">

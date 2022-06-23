@@ -19,7 +19,7 @@ export const Profile = () => {
       <div className="profile-body">
         <img src={require("../../images/Conor.png")} />
         <p>
-          <span class="material-symbols-outlined">account_circle</span>
+          <span className="material-symbols-outlined">account_circle</span>
           Srinibas khuntia
         </p>
         <p>

@@ -6,10 +6,11 @@
 }
 
 .search-con {
-  margin: 1rem;
+  margin: auto;
   box-shadow: var(--box-shadow2);
   position: relative;
   width: 40rem;
+  margin-bottom: 1rem;
 }
 
 .search-con input {
