@@ -8,16 +8,32 @@ import "./Login.css";
 
 import { loadLogin } from "../../features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastMsg } from "../ToastMsg/ToastMsg";
 
 export const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
-    const { token } = useSelector((state) => state.auth);
+    const { token, error } = useSelector((state) => state.auth);
 
     const [form, setForm] = useState({
         email: "", password: ""
     })
+
+    useEffect(() => {
+        if (error) {
+            toast.error(<ToastMsg msg={error} />, {
+                position: "bottom-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"
+            });
+        }
+    },[error])
 
     useEffect(() => {
         if (token) {
@@ -34,7 +50,7 @@ export const Login = () => {
 
 
     const loginToast = () => {
-        toast.success('logged in successfully', {
+        toast.success('logging you in', {
             position: "bottom-right",
             autoClose: 1000,
             hideProgressBar: false,

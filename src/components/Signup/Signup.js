@@ -16,13 +16,26 @@ export const Signup = () => {
         password: ""
     });
 
-    const { token } = useSelector((state) => state.auth)
+    const { token, error } = useSelector((state) => state.auth)
 
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        toast.error(error, {
+            position: "bottom-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored"
+        });
+    }, [error])
+
     const signupToast = () => {
-        toast.success('signed in successfully', {
+        toast.success('signing you in', {
             position: "bottom-right",
             autoClose: 1000,
             hideProgressBar: false,
@@ -58,7 +71,7 @@ export const Signup = () => {
                     <input type="text" name="lastname" value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} />
                 </div>
                 <div className="email-container">
-                    <label htmlFor="email">Username</label>
+                    <label htmlFor="email">Email</label>
                     <input type="email" name="username" value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} />
                 </div>
                 <div className="password-container">

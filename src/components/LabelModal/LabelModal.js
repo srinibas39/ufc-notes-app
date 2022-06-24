@@ -58,6 +58,7 @@ export const LabelModal = ({ show, setShow }) => {
                 </ul>
             </div>
         }
+        
     </>
 
 }

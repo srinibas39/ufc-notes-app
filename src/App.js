@@ -14,6 +14,7 @@ import { TrashPage } from "./pages/TrashPage";
 import { PrivateRoute } from "./PrivateRoute/PrivateRoute";
 
 
+
 export const App = () => {
   const { token } = useSelector((state) => state.auth)
   return <>

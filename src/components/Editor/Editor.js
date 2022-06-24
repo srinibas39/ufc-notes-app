@@ -3,6 +3,8 @@ import { createNote, removeAllTags, setColor, setEditNote, setShowEditor, update
 import { ColorPalette } from "../colorPalette/ColorPalette"
 import "./Editor.css";
 import { useSelector, useDispatch } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export const Editor = ({ setShow }) => {
@@ -41,28 +43,41 @@ export const Editor = ({ setShow }) => {
 
 
     const handleNote = () => {
+        toast.success("Setting up your note", {
+            position: "bottom-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored"
+        });
 
-        if (note.noteTitle) {
+        setTimeout(() => {
+            if (note.noteTitle) {
 
-            if (showEditor && editNote) {
-                dispatch(updateNote({ token, note, noteId: editNote._id }));
-                dispatch(setEditNote({}));
-                dispatch(setShowEditor(false));
+                if (showEditor && editNote) {
+                    dispatch(updateNote({ token, note, noteId: editNote._id }));
+                    dispatch(setEditNote({}));
+                    dispatch(setShowEditor(false));
+                }
+                else {
+                    dispatch(createNote({ token, note }));
+                }
             }
-            else {
-                dispatch(createNote({ token, note }));
-            }
-        }
-        setNote({
-            ...note,
-            noteTitle: "",
-            noteBody: "",
-            color: "",
-            priority: "Low Priority",
-            date: today
-        })
-        dispatch(setColor(""));
-        dispatch(removeAllTags());
+            setNote({
+                ...note,
+                noteTitle: "",
+                noteBody: "",
+                color: "",
+                priority: "Low Priority",
+                date: today
+            })
+            dispatch(setColor(""));
+            dispatch(removeAllTags());
+        }, 1000)
+
     }
     const handleLabel = () => {
         setShow(true)
@@ -76,52 +91,55 @@ export const Editor = ({ setShow }) => {
         note.pin ? setNote({ ...note, pin: false }) : setNote({ ...note, pin: true })
     }
 
-    return <div className={!color ? "editor" : `editor ${color} `} onClick={(e) => e.stopPropagation()} >
-        <div className="editor-header">
-            <input type="text" placeholder="Type Title of the Note" value={note.noteTitle} onChange={(e) => setNote({ ...note, noteTitle: e.target.value })} />
-            {
-                note.pin ?
-                    <span className="material-symbols-sharp" onClick={handlePin}>
-                        push_pin
-                    </span> :
-                    <span className="material-symbols-rounded" onClick={handlePin}>
-                        push_pin
-                    </span>
-
-            }
-        </div>
-        <div className="editor-body">
-            <textarea placeholder="Type Body of the Text" value={note.noteBody} onChange={(e) => setNote({ ...note, noteBody: e.target.value })}></textarea>
-        </div>
-        <div className="editor-tags">
-
-            {
-                labels && labels.map((label) => {
-                    return <button key={label}>{label}</button>
-                })
-            }
-
-
-        </div>
-        <div className="editor-footer">
-            <small>{today}</small>
-            <select onChange={(e) => handlePriority(e.target.value)}>
+    return <>
+        <div className={!color ? "editor" : `editor ${color} `} onClick={(e) => e.stopPropagation()} >
+            <div className="editor-header">
+                <input type="text" placeholder="Type Title of the Note" value={note.noteTitle} onChange={(e) => setNote({ ...note, noteTitle: e.target.value })} />
                 {
-                    prioritySelect.map((priority) => {
-                        return <option key={priority} value={priority}>{priority}</option>
+                    note.pin ?
+                        <span className="material-symbols-sharp" onClick={handlePin}>
+                            push_pin
+                        </span> :
+                        <span className="material-symbols-rounded" onClick={handlePin}>
+                            push_pin
+                        </span>
+
+                }
+            </div>
+            <div className="editor-body">
+                <textarea placeholder="Type Body of the Text" value={note.noteBody} onChange={(e) => setNote({ ...note, noteBody: e.target.value })}></textarea>
+            </div>
+            <div className="editor-tags">
+
+                {
+                    labels && labels.map((label) => {
+                        return <button key={label}>{label}</button>
                     })
                 }
 
-            </select>
-            <div className="editor-option">
-                <span className="material-symbols-outlined" onClick={handleNote}>
-                    check_circle
-                </span>
-                <ColorPalette />
-                <span className="material-symbols-outlined" onClick={handleLabel}>
-                    label
-                </span>
+
+            </div>
+            <div className="editor-footer">
+                <small>{today}</small>
+                <select onChange={(e) => handlePriority(e.target.value)}>
+                    {
+                        prioritySelect.map((priority) => {
+                            return <option key={priority} value={priority}>{priority}</option>
+                        })
+                    }
+
+                </select>
+                <div className="editor-option">
+                    <span className="material-symbols-outlined" onClick={handleNote}>
+                        check_circle
+                    </span>
+                    <ColorPalette />
+                    <span className="material-symbols-outlined" onClick={handleLabel}>
+                        label
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
+        <ToastContainer />
+    </>
 }
