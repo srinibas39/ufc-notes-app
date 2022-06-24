@@ -1,7 +1,7 @@
 
 
-import { useState } from "react"
-import { loadTags, removeTags, setAllTags } from "../../features/notesSlice";
+import { useEffect, useState } from "react"
+import { loadTags, removeTags, setAllTags, setLabel } from "../../features/notesSlice";
 import "./LabelModal.css";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,7 +15,7 @@ export const LabelModal = ({ show, setShow }) => {
 
 
     const handleAdd = () => {
-        if (input && !tags.includes(input) && !allTags.includes(input)) {
+        if (input && !tags.includes(input)) {
             setTags([...tags, input]);
             setInput("");
             dispatch(setAllTags(input))
@@ -34,7 +34,7 @@ export const LabelModal = ({ show, setShow }) => {
 
     return <>
         {
-             <div className="label-modal-container">
+            <div className="label-modal-container">
                 <ul className="label-modal" >
                     <div className="label-header">
                         <p>Add To label</p>
@@ -58,7 +58,7 @@ export const LabelModal = ({ show, setShow }) => {
                 </ul>
             </div>
         }
-        
+
     </>
 
 }

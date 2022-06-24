@@ -66,9 +66,9 @@ export const Note = ({ note }) => {
     }
     const handleEdit = () => {
         handleToast("setting up your note for editing");
+        dispatch(setEditNote(note))
         setTimeout(() => {
             dispatch(setShowEditor(true));
-            dispatch(setEditNote(note))
         }, 1500)
 
     }
@@ -88,7 +88,7 @@ export const Note = ({ note }) => {
             <div className="note-header">
                 <h3>{note.noteTitle}</h3>
                 {
-                    note.pin ? <span class="material-symbols-sharp" onClick={handlePin}>
+                    note.pin ? <span className="material-symbols-sharp" onClick={handlePin}>
                         push_pin
                     </span> : <span className="material-symbols-outlined" onClick={handlePin}>
                         push_pin

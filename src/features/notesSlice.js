@@ -147,6 +147,10 @@ export const notesSlice = createSlice({
         },
         loadFilter:(state,action)=>{
             state.filter=action.payload
+        },
+        setLabel:(state,action)=>{
+            
+            state.labels=action.payload
         }
 
     },
@@ -264,5 +268,5 @@ export const notesSlice = createSlice({
 })
 
 
-export const { loadTags, removeTags, setColor, removeAllTags, setAllTags, setShowEditor, setEditNote, setShowFilter,loadFilter } = notesSlice.actions;
+export const { loadTags, removeTags, setColor, removeAllTags, setAllTags, setShowEditor, setEditNote, setShowFilter,loadFilter , setLabel} = notesSlice.actions;
 export default notesSlice.reducer;

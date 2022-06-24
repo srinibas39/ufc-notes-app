@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createNote, removeAllTags, setColor, setEditNote, setShowEditor, updateNote } from "../../features/notesSlice";
+import { createNote, removeAllTags, setEditNote, setLabel, setShowEditor, updateNote } from "../../features/notesSlice";
 import { ColorPalette } from "../colorPalette/ColorPalette"
 import "./Editor.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -37,7 +37,18 @@ export const Editor = ({ setShow }) => {
     useEffect(() => {
         if (showEditor) {
             setNote(editNote);
-            // console.log("hello");
+            dispatch(setLabel(editNote.tags))
+        } else {
+            setNote({
+                ...note,
+                noteTitle: "",
+                noteBody: "",
+                color: "",
+                tags: [],
+                priority: "Low Priority",
+                date: today,
+                pin: false
+            })
         }
     }, [showEditor])
 
@@ -58,24 +69,31 @@ export const Editor = ({ setShow }) => {
             if (note.noteTitle) {
 
                 if (showEditor && editNote) {
+
                     dispatch(updateNote({ token, note, noteId: editNote._id }));
                     dispatch(setEditNote({}));
                     dispatch(setShowEditor(false));
+                    dispatch(removeAllTags())
                 }
                 else {
                     dispatch(createNote({ token, note }));
+                    setNote({
+                        ...note,
+                        noteTitle: "",
+                        noteBody: "",
+                        color: "",
+                        tags: [],
+                        priority: "Low Priority",
+                        date: today,
+                        pin: false
+                    })
+                    dispatch(removeAllTags())
+
+
                 }
+
             }
-            setNote({
-                ...note,
-                noteTitle: "",
-                noteBody: "",
-                color: "",
-                priority: "Low Priority",
-                date: today
-            })
-            dispatch(setColor(""));
-            dispatch(removeAllTags());
+
         }, 1000)
 
     }
@@ -92,7 +110,7 @@ export const Editor = ({ setShow }) => {
     }
 
     return <>
-        <div className={!color ? "editor" : `editor ${color} `} onClick={(e) => e.stopPropagation()} >
+        <div className={!note.color ? "editor" : `editor ${note.color} `} onClick={(e) => e.stopPropagation()} >
             <div className="editor-header">
                 <input type="text" placeholder="Type Title of the Note" value={note.noteTitle} onChange={(e) => setNote({ ...note, noteTitle: e.target.value })} />
                 {
@@ -112,8 +130,8 @@ export const Editor = ({ setShow }) => {
             <div className="editor-tags">
 
                 {
-                    labels && labels.map((label) => {
-                        return <button key={label}>{label}</button>
+                    note.tags && note.tags.map((tag) => {
+                        return <button key={tag}>{tag}</button>
                     })
                 }
 
@@ -121,7 +139,7 @@ export const Editor = ({ setShow }) => {
             </div>
             <div className="editor-footer">
                 <small>{today}</small>
-                <select onChange={(e) => handlePriority(e.target.value)}>
+                <select onChange={(e) => handlePriority(e.target.value)} value={note.priority}>
                     {
                         prioritySelect.map((priority) => {
                             return <option key={priority} value={priority}>{priority}</option>
