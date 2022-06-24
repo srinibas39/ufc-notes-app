@@ -44,8 +44,12 @@
 }
 .note-header span {
   color: var(--primary-color);
+  cursor: pointer;
 }
 
-.note-options {
+.note-options  {
   position: relative;
+ 
 }
+
+

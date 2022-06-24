@@ -73,16 +73,28 @@ export const Note = ({ note }) => {
 
     }
 
-  
+    const handlePin = () => {
+        note.pin ? handleToast("Your note is getting unpinned") : handleToast("Your note is getting pinned");
+        setTimeout(() => {
+            note.pin ? dispatch(updateNote({ token, note: { ...note, pin: false }, noteId: note._id })) :
+                dispatch(updateNote({ token, note: { ...note, pin: true }, noteId: note._id }))
+        }, 1000)
+
+    }
 
 
     return <>
         <div className={`note ${note.color}`}>
             <div className="note-header">
                 <h3>{note.noteTitle}</h3>
-                <span className="material-symbols-outlined">
-                    push_pin
-                </span>
+                {
+                    note.pin ? <span class="material-symbols-sharp" onClick={handlePin}>
+                        push_pin
+                    </span> : <span className="material-symbols-outlined" onClick={handlePin}>
+                        push_pin
+                    </span>
+                }
+
             </div>
             <div className="note-body">
                 {note.noteBody}
