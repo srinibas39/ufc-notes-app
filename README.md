@@ -12,6 +12,7 @@
 + Archive Notes
 + Trash Notes
 + Delete Notes
++ Edit Notes
 + Authentication 
 + Sign-up
 + Login
