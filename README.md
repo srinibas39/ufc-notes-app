@@ -4,7 +4,6 @@
 
 + Add a new note
 + Rich Text Editor
-+ Edit & Delete Note
 + Filter & Sort by date, priority, tags
 + Change Card Color
 + Add Tags to notes
@@ -13,6 +12,7 @@
 + Trash Notes
 + Delete Notes
 + Edit Notes
++ Pin and unpin notes
 + Authentication 
 + Sign-up
 + Login
