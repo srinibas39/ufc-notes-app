@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loadFilter, setShowFilter } from "../../features/notesSlice";
+import { loadFilter, setSearchFilter, setShowFilter } from "../../features/notesSlice";
 import "./FilterNote.css";
 
 export const FilterNote = () => {
@@ -45,7 +45,7 @@ export const FilterNote = () => {
         setFilterOption({ ...filterOption, sort: sortType })
     }
     const handleAllFilter = () => {
-
+        dispatch(setSearchFilter(""));
         dispatch(setShowFilter(false));
         dispatch(loadFilter(filterOption));
         navigate("/filter");

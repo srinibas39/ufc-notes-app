@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AutoComplete } from "../components/AutoComplete/AutoComplete"
 import { Editor } from "../components/Editor/Editor"
 import { LabelModal } from "../components/LabelModal/LabelModal"
@@ -11,8 +11,17 @@ import { FilterNote } from "../components/FilterNote/FilterNote"
 
 export const NotesPage = () => {
     const [show, setShow] = useState(false);//label
-
+    const [notesTitle, setNotesTitle] = useState([]);
     const { notes, showEditor, showFilter } = useSelector((state) => state.notes);
+
+    useEffect(() => {
+        if (notes.length) {
+            const title = notes.map((el) => el.noteTitle);
+            setNotesTitle(title);
+        }
+    }, [notes])
+
+
 
     const getPinnedNotes = () => {
         return notes && notes.filter((note) => note.pin)
@@ -26,7 +35,7 @@ export const NotesPage = () => {
     return <>
         <NavBar />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-            <AutoComplete />
+            <AutoComplete suggestions={notesTitle} />
             <Editor setShow={setShow} />
             {
                 notes.length ? <h2 className="primary-color">ALL NOTES</h2> : ""

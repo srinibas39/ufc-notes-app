@@ -1,17 +1,23 @@
-import { useSelector } from "react-redux"
+import {  useSelector } from "react-redux"
 import { NavBar } from "../components/NavBar/NavBar"
 import { Note } from "../components/Note/Note"
 import { useNavigate } from "react-router-dom"
 
 
+
+
 export const FilteredNotesPage = () => {
     const navigate = useNavigate();
-    const { notes, filter } = useSelector((state) => state.notes);
-
+    const { notes, filter, searchFilter } = useSelector((state) => state.notes);
+    
 
 
     const getFilteredNotes = () => {
-        if (filter.priorityFilter.length) {
+        if (searchFilter) {
+            return notes.filter((el) => el.noteTitle === searchFilter);
+            
+        }
+        else if (filter.priorityFilter.length) {
 
             return notes.filter((note) => filter.priorityFilter.includes(note.priority))
         }
@@ -19,6 +25,7 @@ export const FilteredNotesPage = () => {
 
             return notes.filter((note) => note.tags.some((el) => filter.labelFilter.includes(el)))
         }
+
         else {
             return notes;
         }
@@ -43,10 +50,11 @@ export const FilteredNotesPage = () => {
             <button className="btn-home" onClick={() => navigate("/notes")} >Return to Home</button>
             <h2 className="primary-color">FILTERED NOTES</h2>
             {
-                sortedNotes ? sortedNotes.map((note) => {
+                sortedNotes.length ? sortedNotes.map((note) => {
                     return <Note note={note} key={note._id} />
                 }) : ""
             }
+
             {
                 !notes.length && <p style={{ margin: "1rem", color: "#d20a0a" }}>No Notes available!!</p>
             }
