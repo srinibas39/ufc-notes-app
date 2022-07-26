@@ -31,12 +31,21 @@ export const Note = ({ note }) => {
 
 
     const handleArchive = () => {
+
         handleToast("Your note is getting added to archive");
+        if (location.pathname === "/trash") {
+            setTimeout(() => dispatch(restoreTrash({ token, noteId: note._id })), 1000)
+        }
+
         setTimeout(() => dispatch(loadArchive({ token, note, noteId: note._id })), 1000)
 
     }
     const handleTrash = () => {
         handleToast("Your note is getting added to trash");
+        if (location.pathname === "/archive") {
+            setTimeout(() => dispatch(restoreArchive({ token, noteId: note._id })), 1000)
+
+        }
         setTimeout(() => dispatch(loadTrash({ token, note, noteId: note._id })), 1000)
 
     }
@@ -88,11 +97,11 @@ export const Note = ({ note }) => {
             <div className="note-header">
                 <h3>{note.noteTitle}</h3>
                 {
-                    note.pin ? <span className="material-symbols-sharp" onClick={handlePin}>
+                    location.pathname === "/notes" && (note.pin ? <span className="material-symbols-sharp" onClick={handlePin}>
                         push_pin
                     </span> : <span className="material-symbols-outlined" onClick={handlePin}>
                         push_pin
-                    </span>
+                    </span>)
                 }
 
             </div>
@@ -111,9 +120,12 @@ export const Note = ({ note }) => {
                 <small>Created on {note.date}</small>
                 <small>{note.priority}</small>
                 <div className="note-options">
-                    <span className="material-symbols-outlined" onClick={handleEdit}>
-                        edit
-                    </span>
+                    {
+                        location.pathname === "/notes" && <span className="material-symbols-outlined" onClick={handleEdit}>
+                            edit
+                        </span>
+                    }
+
                     {
                         archives.some((not) => not._id === note._id) ? <span className="material-symbols-sharp" onClick={restArchive}>
                             archive

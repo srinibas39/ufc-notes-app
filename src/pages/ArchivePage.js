@@ -4,7 +4,7 @@ import { Note } from "../components/Note/Note";
 import { useSelector } from "react-redux";
 
 export const ArchivePage = () => {
-    const { archives,error} = useSelector((state) => state.notes);
+    const { archives } = useSelector((state) => state.notes);
     return <>
         <NavBar />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
@@ -12,7 +12,7 @@ export const ArchivePage = () => {
             {
                 archives && archives.map((note) => {
                     return <Note note={note} key={note._id} />
-                }) 
+                })
             }
         </div>
     </>

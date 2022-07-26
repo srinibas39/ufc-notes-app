@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./ColorPalette.css";
 import { useDispatch } from "react-redux";
 import { setColor } from "../../features/notesSlice";
+
 export const ColorPalette = () => {
 
     const [colors, setColors] = useState(false);
