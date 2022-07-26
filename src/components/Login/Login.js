@@ -8,7 +8,7 @@ import "./Login.css";
 
 import { loadLogin } from "../../features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastMsg } from "../ToastMsg/ToastMsg";
+import { handleToast, handleToastError } from "../../utils/ToastUtils/toastUtils";
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -22,18 +22,9 @@ export const Login = () => {
 
     useEffect(() => {
         if (error) {
-            toast.error(<ToastMsg msg={error} />, {
-                position: "bottom-right",
-                autoClose: 1000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored"
-            });
+            handleToastError(error)
         }
-    },[error])
+    }, [error])
 
     useEffect(() => {
         if (token) {
@@ -50,16 +41,7 @@ export const Login = () => {
 
 
     const loginToast = () => {
-        toast.success('logging you in', {
-            position: "bottom-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored"
-        });
+        handleToast("'logging you in")
     }
 
     const handleSubmit = () => {

@@ -1,7 +1,7 @@
 
 import { Editor } from "../Editor/Editor";
 import "./EditNotes.css";
-import { useSelector,useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setShowEditor } from "../../features/notesSlice";
 
 export const EditNotes = ({show ,setShow}) => {

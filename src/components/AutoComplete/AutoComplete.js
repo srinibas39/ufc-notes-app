@@ -36,6 +36,8 @@ export const AutoComplete = ({ suggestions }) => {
             setSearchText(filteredSuggestion[activeSuggestionIndex]);
             setFiltereSuggestion([]);
             setShowSuggestion(false)
+            dispatch(setSearchFilter(filteredSuggestion[activeSuggestionIndex]))
+            navigate("/filter")
         }
         else if (e.keyCode === 38) {
             if (activeSuggestionIndex === 0) {

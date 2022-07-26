@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
+
 import { useNavigate } from "react-router-dom"
-import HeroSvg from "../../utils/Hero.svg"
+import HeroSvg from "../../utils/svg/Hero.svg"
 import "./Hero.css"
 export const Hero = () => {
     const navigate = useNavigate();

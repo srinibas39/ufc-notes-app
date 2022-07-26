@@ -1,7 +1,7 @@
 
 
-import { useEffect, useState } from "react"
-import { loadTags, removeTags, setAllTags, setLabel } from "../../features/notesSlice";
+import { useState } from "react"
+import { loadTags, removeTags, setAllTags} from "../../features/notesSlice";
 import "./LabelModal.css";
 import { useDispatch, useSelector } from "react-redux";
 

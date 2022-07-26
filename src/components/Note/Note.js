@@ -3,9 +3,8 @@ import "./Note.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteArchive, deleteNote, deleteTrash, loadArchive, loadTrash, restoreArchive, restoreTrash, setEditNote, setShowEditor, updateNote } from "../../features/notesSlice";
 import { useLocation } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastMsg } from "../ToastMsg/ToastMsg";
+import { ToastContainer } from "react-toastify";
+import { handleToast } from "../../utils/ToastUtils/toastUtils";
 
 export const Note = ({ note }) => {
 
@@ -16,18 +15,6 @@ export const Note = ({ note }) => {
     const dispatch = useDispatch();
     const location = useLocation();
 
-    const handleToast = (msg) => {
-        toast.success(<ToastMsg msg={msg} />, {
-            position: "bottom-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored"
-        });
-    }
 
 
     const handleArchive = () => {

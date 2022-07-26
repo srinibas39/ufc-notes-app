@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadSignup } from "../../features/authSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { handleToast, handleToastError } from "../../utils/ToastUtils/toastUtils";
 
 export const Signup = () => {
     const navigate = useNavigate();
@@ -22,29 +23,11 @@ export const Signup = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        toast.error(error, {
-            position: "bottom-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored"
-        });
+        handleToastError(error)
     }, [error])
 
     const signupToast = () => {
-        toast.success('signing you in', {
-            position: "bottom-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored"
-        });
+        handleToast("signing you in");
     }
 
     const handleSubmit = () => {

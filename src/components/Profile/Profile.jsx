@@ -5,22 +5,14 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import "./Profile.css";
+import { handleToast } from "../../utils/ToastUtils/toastUtils";
 export const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, authType } = useSelector((state) => state.auth);
 
   const logoutHandler = () => {
-    toast.success("Signing you out", {
-      position: "bottom-right",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
+    handleToast("Signing you out")
     setTimeout(() => {
       dispatch(loadLogout());
       navigate("/");

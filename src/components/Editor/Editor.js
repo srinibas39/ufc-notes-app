@@ -3,8 +3,9 @@ import { createNote, removeAllTags, setEditNote, setLabel, setShowEditor, update
 import { ColorPalette } from "../colorPalette/ColorPalette"
 import "./Editor.css";
 import { useSelector, useDispatch } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { handleToast, handleToastWarning } from "../../utils/ToastUtils/toastUtils";
 
 
 export const Editor = ({ setShow }) => {
@@ -54,20 +55,11 @@ export const Editor = ({ setShow }) => {
 
 
     const handleNote = () => {
-        toast.success("Setting up your note", {
-            position: "bottom-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored"
-        });
+        if (note.noteTitle) {
 
-        setTimeout(() => {
-            if (note.noteTitle) {
-
+            handleToast("Setting up your note")
+            setTimeout(() => {
+                
                 if (showEditor && editNote) {
 
                     dispatch(updateNote({ token, note, noteId: editNote._id }));
@@ -92,9 +84,12 @@ export const Editor = ({ setShow }) => {
 
                 }
 
-            }
 
-        }, 1000)
+            }, 1000)
+        }
+        else{
+            handleToastWarning("Note title cannot be empty")
+        }
 
     }
     const handleLabel = () => {

@@ -14,6 +14,7 @@ export const FilterNote = () => {
         labelFilter: [],
         priorityFilter: []
     })
+    const [filter, setFilter] = useState("Priority");
 
 
     const handleFilter = (filteredValue) => {
@@ -24,7 +25,7 @@ export const FilterNote = () => {
             setFilter(filteredValue)
         }
     }
-    const [filter, setFilter] = useState("Priority");
+  
 
     const handleClear = () => {
         setFilter("Priority");
