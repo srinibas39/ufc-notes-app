@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { handleToast, handleToastWarning } from "../../utils/ToastUtils/toastUtils";
+import { setDarkMode } from "../../features/modeSlice";
 
 
 export const Editor = ({ setShow }) => {
@@ -25,6 +26,7 @@ export const Editor = ({ setShow }) => {
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth);
     const { labels, color, editNote, showEditor } = useSelector((state) => state.notes);
+    const { mode, darkMode } = useSelector((state) => state.mode)
 
     useEffect(() => {
         setNote({ ...note, tags: labels })
@@ -55,11 +57,11 @@ export const Editor = ({ setShow }) => {
 
 
     const handleNote = () => {
-        if (note.noteTitle) {
-
+        if (note.noteTitle.trim()) {
+            dispatch(setDarkMode("dark-mode"))
             handleToast("Setting up your note")
             setTimeout(() => {
-                
+
                 if (showEditor && editNote) {
 
                     dispatch(updateNote({ token, note, noteId: editNote._id }));
@@ -87,7 +89,7 @@ export const Editor = ({ setShow }) => {
 
             }, 1000)
         }
-        else{
+        else {
             handleToastWarning("Note title cannot be empty")
         }
 
@@ -104,8 +106,9 @@ export const Editor = ({ setShow }) => {
         note.pin ? setNote({ ...note, pin: false }) : setNote({ ...note, pin: true })
     }
 
-    return <>
-        <div className={!note.color ? "editor" : `editor ${note.color} `} onClick={(e) => e.stopPropagation()} >
+
+    return <div>
+        <div id={mode ? darkMode : ""} className={!note.color ? `editor` : `editor ${note.color} `} onClick={(e) => e.stopPropagation()} >
             <div className="editor-header">
                 <input type="text" placeholder="Type Title of the Note" value={note.noteTitle} onChange={(e) => setNote({ ...note, noteTitle: e.target.value })} />
                 {
@@ -154,5 +157,5 @@ export const Editor = ({ setShow }) => {
             </div>
         </div>
         <ToastContainer />
-    </>
+    </div>
 }

@@ -1,15 +1,12 @@
-.auto-input {
+li:hover {
   background-color: var(--primary-color);
   color: var(--secondary-color2);
-  cursor: pointer;
-}
- li:hover {
-
   cursor: pointer;
 }
 
 .search-con {
   margin: auto;
+  margin-top: 1rem;
   box-shadow: var(--box-shadow2);
   position: relative;
   width: 40rem;
@@ -25,7 +22,7 @@
   padding-right: 10px;
 }
 
-.search-icon{
+.search-icon {
   position: absolute;
   top: 4px;
   left: 10px;
@@ -44,8 +41,7 @@
   margin: 5px 0;
 }
 
-
-.sort-conf{
+.sort-conf {
   position: absolute;
   right: 10px;
   top: 4px;

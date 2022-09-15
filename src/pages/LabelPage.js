@@ -7,8 +7,9 @@ import { v4 as uuid } from "uuid";
 
 export const LabelPage = () => {
 
-    const { allTags, notes } = useSelector((state) => state.notes)
-    return <>
+    const { allTags, notes } = useSelector((state) => state.notes);
+    const { mode } = useSelector((state) => state.mode)
+    return <div id={mode ? "dark-mode" : ""} style={{minHeight:"100vh"}}>
         <NavBar />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
             <h2 className="primary-color" style={{ marginBottom: "1rem" }}>ALL LABELS</h2>
@@ -31,5 +32,5 @@ export const LabelPage = () => {
                 }) : ""
             }
         </div>
-    </>
+    </div>
 }

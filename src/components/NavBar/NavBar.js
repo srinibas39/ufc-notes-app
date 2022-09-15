@@ -1,9 +1,18 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
+import { setMode } from "../../features/modeSlice";
 import "./NavBar.css"
 
 export const NavBar = () => {
     const navigate = useNavigate();
-    return <div className="navBar">
+    const dispatch = useDispatch();
+    const { mode } = useSelector((state) => state.mode)
+
+    const handleMode = () => {
+        dispatch(setMode());
+    }
+
+    return <div className="navBar" id={mode ? "dark-mode" : ""} style={{ marginBottom: "1rem" }}>
         <div className="navBar-img" onClick={() => navigate("/")}>
 
             <svg
@@ -29,7 +38,6 @@ export const NavBar = () => {
                     speaker_notes
                 </span>
             </div>
-
             <div onClick={() => navigate("/archive")}>
                 <span className="material-symbols-outlined">
                     archive
@@ -45,6 +53,21 @@ export const NavBar = () => {
                     label
                 </span>
             </div>
+            {
+                mode ? <div onClick={handleMode}>
+                    <span class="material-symbols-outlined">
+                        light_mode
+                    </span>
+                </div> :
+                    <div onClick={handleMode}>
+                        <span class="material-symbols-outlined">
+                            dark_mode
+                        </span>
+                    </div>
+
+            }
+
+
 
 
         </div>

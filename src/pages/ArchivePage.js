@@ -5,9 +5,10 @@ import { useSelector } from "react-redux";
 
 export const ArchivePage = () => {
     const { archives } = useSelector((state) => state.notes);
-    return <>
+    const { mode } = useSelector((state) => state.mode)
+    return <div id={mode ? "dark-mode" : ""} style={{minHeight:"100vh"}}>
         <NavBar />
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+        <div  style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
             <h2 className="primary-color">ARCHIVES</h2>
             {
                 archives && archives.map((note) => {
@@ -15,5 +16,5 @@ export const ArchivePage = () => {
                 })
             }
         </div>
-    </>
+    </div>
 }

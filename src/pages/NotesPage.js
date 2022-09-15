@@ -13,6 +13,7 @@ export const NotesPage = () => {
     const [show, setShow] = useState(false);//label
     const [notesTitle, setNotesTitle] = useState([]);
     const { notes, showEditor, showFilter } = useSelector((state) => state.notes);
+    const {mode}=useSelector((state)=>state.mode)
 
     useEffect(() => {
         if (notes.length) {
@@ -32,7 +33,8 @@ export const NotesPage = () => {
         return notes && notes.filter((note) => !note.pin)
     }
     const otherNotes = getOtherNotes();
-    return <>
+    
+    return <div id={mode?"dark-mode":""} style={{minHeight:"100vh"}}>
         <NavBar />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
             <AutoComplete suggestions={notesTitle} />
@@ -70,5 +72,5 @@ export const NotesPage = () => {
         {
             showFilter && <FilterNote />
         }
-    </>
+    </div>
 }

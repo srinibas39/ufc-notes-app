@@ -1,4 +1,4 @@
-import {  useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { NavBar } from "../components/NavBar/NavBar"
 import { Note } from "../components/Note/Note"
 import { useNavigate } from "react-router-dom"
@@ -9,13 +9,14 @@ import { useNavigate } from "react-router-dom"
 export const FilteredNotesPage = () => {
     const navigate = useNavigate();
     const { notes, filter, searchFilter } = useSelector((state) => state.notes);
-    
+    const { mode } = useSelector((state) => state.mode)
+
 
 
     const getFilteredNotes = () => {
         if (searchFilter) {
             return notes.filter((el) => el.noteTitle === searchFilter);
-            
+
         }
         else if (filter.priorityFilter.length) {
 
@@ -44,7 +45,7 @@ export const FilteredNotesPage = () => {
     const sortedNotes = getSortedNotes();
 
 
-    return <>
+    return <div id={mode ? "dark-mode" : ""} style={{ minHeight: "100vh" }}>
         <NavBar />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
             <button className="btn-home" onClick={() => navigate("/notes")} >Return to Home</button>
@@ -60,5 +61,5 @@ export const FilteredNotesPage = () => {
             }
 
         </div>
-    </>
+    </div>
 }

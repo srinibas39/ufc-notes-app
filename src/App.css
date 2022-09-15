@@ -65,3 +65,10 @@
 .btn-home:hover {
   background-color: var(--primary-color2);
 }
+
+#dark-mode {
+  background-color: var(--footer-color);
+  color: var(--primary-color);
+}
+
+

@@ -1,5 +1,6 @@
 .navBar {
-    margin: 1rem;
+    margin-bottom: 1rem;
+    margin: 0 1rem;
     height: 15vh;
     display: flex;
     align-items: center;

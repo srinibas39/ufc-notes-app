@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 
 export const TrashPage = () => {
     const { trash } = useSelector((state) => state.notes);
-    return <>
+    const { mode } = useSelector((state) => state.mode)
+    return <div id={mode?"dark-mode":""} style={{minHeight:"100vh"}}>
         <NavBar />
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
             <h2 className="primary-color">TRASH</h2>
@@ -15,5 +16,5 @@ export const TrashPage = () => {
                 })
             }
         </div>
-    </>
+    </div>
 }

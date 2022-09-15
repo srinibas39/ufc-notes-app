@@ -15,6 +15,7 @@ export const FilterNote = () => {
         priorityFilter: []
     })
     const [filter, setFilter] = useState("Priority");
+    const { mode } = useSelector((state) => state.mode)
 
 
     const handleFilter = (filteredValue) => {
@@ -25,7 +26,7 @@ export const FilterNote = () => {
             setFilter(filteredValue)
         }
     }
-  
+
 
     const handleClear = () => {
         setFilter("Priority");
@@ -54,8 +55,8 @@ export const FilterNote = () => {
     }
 
 
-    return <div className="filter-container">
-        <div className="filter">
+    return <div className="filter-container" >
+        <div className="filter" id={mode ? "dark-mode" : ""}>
             <div className="filter-header">
                 <h3>{"Sort & Filter Notes"}</h3>
                 <span className="material-symbols-outlined" onClick={() => dispatch(setShowFilter(false))}>
