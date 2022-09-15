@@ -14,17 +14,13 @@ export const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
-    const { token, error } = useSelector((state) => state.auth);
+    const { token } = useSelector((state) => state.auth);
 
     const [form, setForm] = useState({
         email: "", password: ""
     })
 
-    useEffect(() => {
-        if (error) {
-            handleToastError(error)
-        }
-    }, [error])
+ 
 
     useEffect(() => {
         if (token) {
@@ -69,13 +65,6 @@ export const Login = () => {
                 <div className="password-container">
                     <label htmlFor="password">Password</label>
                     <input type="password" value={form.password} name="password" onChange={(e) => setForm({ ...form, password: e.target.value })} />
-                </div>
-                <div className="forgotP-container">
-                    <div className="remember">
-                        <input type="checkbox" name="remember-me" />
-                        <label htmlFor="remember-me">Remember Me</label>
-                    </div>
-                    <a href="#">Forgot Your Password ?</a>
                 </div>
                 <button className="btn-logins" onClick={() => handleSubmit()} >Login</button>
                 <button onClick={() => handleGuest()}>Login as a Guest</button>

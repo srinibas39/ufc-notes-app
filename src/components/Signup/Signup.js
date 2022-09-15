@@ -17,14 +17,11 @@ export const Signup = () => {
         password: ""
     });
 
-    const { token, error } = useSelector((state) => state.auth)
+    const { token } = useSelector((state) => state.auth)
 
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        handleToastError(error)
-    }, [error])
 
     const signupToast = () => {
         handleToast("signing you in");
@@ -33,6 +30,15 @@ export const Signup = () => {
     const handleSubmit = () => {
         signupToast();
         setTimeout(() => dispatch(loadSignup(form)), 1000);
+    }
+    const handleDetails = () => {
+        setForm({
+            ...form, firstName: "sriyasri",
+            lastName: "khuntia",
+            username: "sriyasrikhuntia191@gmail.com",
+            password: "12345678"
+        })
+        
     }
     useEffect(() => {
         if (token) {
@@ -62,11 +68,7 @@ export const Signup = () => {
                     <input type="password" name="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
                 </div>
 
-                <div className="terms">
-                    <input type="checkbox" name="remember-me" />
-                    <label htmlFor="terms">{`I accept all terms & conditions`}</label>
-                </div>
-
+                <button className="btn-register" onClick={() => handleDetails()}>Fill up the fields</button>
                 <button className="btn-register" onClick={() => handleSubmit()}>Create New Account</button>
                 <div className="account-login" onClick={() => navigate("/login")}>
                     <p>Already have an account</p>
