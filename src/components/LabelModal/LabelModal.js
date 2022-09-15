@@ -1,7 +1,7 @@
 
 
 import { useState } from "react"
-import { loadTags, removeTags, setAllTags} from "../../features/notesSlice";
+import { loadTags, removeTags, setAllTags } from "../../features/notesSlice";
 import "./LabelModal.css";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,7 +10,8 @@ export const LabelModal = ({ show, setShow }) => {
     const [tags, setTags] = useState([]);
     const [input, setInput] = useState("");
     const dispatch = useDispatch();
-    const { labels, allTags } = useSelector((state) => state.notes)
+    const { labels, allTags } = useSelector((state) => state.notes);
+    const { mode } = useSelector((state) => state.mode)
 
 
 
@@ -34,11 +35,11 @@ export const LabelModal = ({ show, setShow }) => {
 
     return <>
         {
-            <div className="label-modal-container">
-                <ul className="label-modal" >
+            <div className="label-modal-container" >
+                <ul className="label-modal" id={mode ? "dark-mode" : ""} >
                     <div className="label-header">
                         <p>Add To label</p>
-                        <button><span className="material-icons-outlined" onClick={() => setShow(false)}>
+                        <button><span className="material-icons-outlined" id={mode ? "dark-mode" : ""} onClick={() => setShow(false)}>
                             close
                         </span></button>
                     </div>

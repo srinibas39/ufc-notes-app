@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./ColorPalette.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setColor } from "../../features/notesSlice";
 import { setDarkMode } from "../../features/modeSlice";
 
@@ -11,6 +11,7 @@ export const ColorPalette = () => {
   const row3 = ["color7", "color8", "color9"];
 
   const dispatch = useDispatch();
+  const { mode } = useSelector((state) => state.mode);
 
   const handleColors = (el) => {
     dispatch(setDarkMode(""));
@@ -27,7 +28,11 @@ export const ColorPalette = () => {
       </span>
 
       {colors && (
-        <div className="colors" onMouseLeave={() => setColors(false)}>
+        <div
+          className="colors"
+          id={mode ? "dark-mode" : ""}
+          onMouseLeave={() => setColors(false)}
+        >
           <div className="row">
             {row1.map((el, idx) => {
               return (

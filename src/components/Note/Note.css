@@ -3,7 +3,6 @@
   padding: 1rem;
   border-radius: 5px;
   box-shadow: var(--box-shadow2);
-  width: 40rem;
 }
 
 .note-header {
@@ -47,9 +46,15 @@
   cursor: pointer;
 }
 
-.note-options  {
+.note-options {
   position: relative;
- 
+}
+
+
+@media (min-width: 30rem) {
+  .note {
+    width: 40rem;
+  }
 }
 
 

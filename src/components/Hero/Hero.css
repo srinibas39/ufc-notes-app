@@ -1,18 +1,21 @@
 .hero-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: var(--secondary-color2);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  height: 100vh;
+  background-color: var(--secondary-color2);
 }
 .hero {
-    height: 80vh;
-    width: 80vw;
-    border-radius: 1rem;
-    padding: 1rem;
-    display: flex;
-    box-shadow: var(--box-shadow2);
-    background-color: var(--secondary-color);
+  height: 80vh;
+  width: 80vw;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--box-shadow2);
+  background-color: var(--secondary-color);
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
 }
 
 .hero-container-text {
@@ -44,23 +47,41 @@
   margin-top: 10px;
 }
 
-.hero-container-img img{
-    height: 100%;
-    width: 100%;
+.hero-container-img img {
+  height: 100%;
+  width: 100%;
 }
 
-.hero-container-message span{
-    color:var(--primary-color)
+.hero-container-message span {
+  color: var(--primary-color);
 }
 
-.btn-join{
-    height: 2rem;
-    width: 6rem;
-    background-color: var(--primary-color2);
-    color: var(--secondary-color);
-    cursor: pointer;
+.btn-join {
+  height: 2rem;
+  width: 6rem;
+  background-color: var(--primary-color2);
+  color: var(--secondary-color);
+  cursor: pointer;
+  margin: 1rem;
 }
 
-.btn-join:hover{
-    background-color: var(--primary-color);
+.btn-join:hover {
+  background-color: var(--primary-color);
+}
+
+@media (min-width: 40rem) {
+  .hero {
+    height: 80vh;
+    width: 80vw;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    box-shadow: var(--box-shadow2);
+    background-color: var(--secondary-color);
+    font-size: 16px;
+  }
+  .hero-container{
+    align-items: center;
+  }
 }

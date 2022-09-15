@@ -1,5 +1,4 @@
 .editor {
-  width: 40rem;
   margin: 1rem;
   padding: 1rem;
   box-shadow: var(--box-shadow2);
@@ -50,6 +49,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 14px;
 }
 
 .editor-footer small,
@@ -72,7 +72,6 @@ select {
 .editor-option {
   position: relative;
 }
-
 
 .color1 {
   background-color: #fca5a5;
@@ -101,4 +100,12 @@ select {
 .color9 {
   background-color: #e879f9;
 }
+
+
+@media (min-width: 30rem) {
+  .editor {
+    width: 40rem;
+  }
+}
+
 
